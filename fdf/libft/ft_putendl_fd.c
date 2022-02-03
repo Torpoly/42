@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/02 18:53:48 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/02 19:47:00 by rpol             ###   ########.fr       */
+/*   Created: 2021/11/24 22:20:05 by rpol              #+#    #+#             */
+/*   Updated: 2021/11/30 00:27:30 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
-#include <unistd.h>
+#include "libft.h"
 
-int main(void)
+void	ft_putendl_fd(char *s, int fd)
 {
-  void *mlx;
-  void *window;
-  
-  mlx = mlx_init();
-  if (!mlx)
-    return (write(1, "ERROR\n", 6), -1);
-  window = mlx_new_window(mlx, 1000, 1000, "kayak");
-  
-  mlx_loop(mlx);
-  return (0);
+	ft_putstr_fd(s, fd);
+	ft_putchar_fd('\n', fd);
 }

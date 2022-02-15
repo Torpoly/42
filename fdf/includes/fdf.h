@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 14:16:22 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/07 18:01:06 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/15 18:46:49 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,45 +20,58 @@
 # include <errno.h>
 # include "mlx.h"
 # include "libft.h"
+# include <math.h>
 
+typedef struct s_map {
+	int				x;
+	int				y;
+	int				z;
+	int				c;
+	struct s_map	*next;
+}				t_map;
 
-typedef struct	s_vars {
+typedef struct s_tab {
+	char			*s;
+	struct s_tab	*next;
+}				t_tab;
+
+typedef struct s_vars {
 	void	*mlx;
 	void	*win;
 	void	*img;
-    char    *name;
-    int     fd;
-    int     winx;
-    int     winy;
-    char    **tab;
-    int     err;
-    size_t  stdc;
-    t_map   *map;
-    t_map   *topl;
+	int		size;
+	char	*name;
+	int		fd;
+	int		winx;
+	int		winy;
+	t_tab	*tab;
+	t_tab	*l;
+	char	*s;
+	int		err;
+	int		posx;
+	int		zval;
+	int		posy;
+	int		a;
+	int		stdc;
+	t_map	*map;
+	t_map	*topl;
 }				t_vars;
-
-typedef struct	s_map {
-	int	    x;
-	int     y;
-	int     z;
-    char   *c;
-    t_map   *next;
-}				t_map;
-
 
 /*IN FDF.C*/
 
-int fput(char *s);
+int		fput(char *s);
 
 /*IN FT_PARSING.C*/
 
-int	      ft_parsing(int ac, char **av, t_vars *vars);
+int		ft_atoip(t_vars *vars);
+
+int		ft_parsing(int ac, char **av, t_vars *vars);
 
 /*IN GET_NEXT_LINE.C*/
 
 char	*get_next_line(int fd);
 
-char	**gnl(t_vars *vars);
+int		gnl(t_vars *vars);
 
 /*IN GET_NEXT_LINE_UTILS.C*/
 
@@ -74,8 +87,12 @@ char	*ft_cut(char *s, char *line);
 
 /* ft_split_ps.c */
 
-char			**ft_free_array(char **sa, int i);
+char	**ft_free_array(char **sa, int i);
 
-char			**ft_split_ps(char *s, char c, int i);
+char	**ft_split_ps(char *s, char c, int i);
+
+/* ft_linkinit.c */
+
+int		ft_linkinit(t_vars *vars);
 
 #endif

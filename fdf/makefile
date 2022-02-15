@@ -6,16 +6,17 @@
 #    By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/03 14:17:45 by rpol              #+#    #+#              #
-#    Updated: 2022/02/03 14:24:33 by rpol             ###   ########.fr        #
+#    Updated: 2022/02/11 14:41:09 by rpol             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
-MLXFLAGS = -lXext -lX11
+CFLAGS = -Wall -Wextra -Werror 
+MLXFLAGS = -lXext -lX11 -lm
 
 NAME = fdf
-SRCS_NAME = fdf.c
+SRCS_NAME = fdf.c ft_linkinit.c ft_parsing.c ft_split_ps.c get_next_line.c \
+			get_next_line_utils.c
 SRCS_PATH = srcs
 SRCS = $(addprefix $(SRCS_PATH)/, $(SRCS_NAME))
 INCS_NAME = fdf.h

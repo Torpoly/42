@@ -6,19 +6,58 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 10:18:27 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/07 16:48:59 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/11 13:27:29 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int
+static void	ft_freelktab(t_vars *vars)
+{
+	t_tab	*t;
+
+	while (vars->tab->next != NULL)
+	{
+		t = vars->tab;
+		vars->tab = vars->tab->next;
+		free(t);
+	}
+	free(vars->tab);
+}
+
+int	ft_atoip(t_vars *vars)
+{
+	char	*str;
+	int		sign;
+	int		nb;
+
+	sign = 1;
+	nb = 0;
+	str = vars->s;
+	fput(str);
+	fput("4\n");
+	while (*str == ' ')
+		str++;
+	fput("4a\n");
+	if (*str == '-')
+		sign = -1;
+	fput("4b\n");
+	while (*str >= '0' && *str <= '9')
+	{
+		nb = (nb * 10) + (*str - '0');
+		str++;
+	}
+	fput("4c\n");
+	vars->s = str;
+	return (nb * sign);
+}
 
 int	ft_parsing(int ac, char **av, t_vars *vars)
 {
 	vars->err = 0;
 	vars->winx = 0;
 	vars->winy = 0;
+	vars->size = 800;
 	if (ac != 2)
 		return (fput("ERROR WRONG ARGUMENTS\n"));
 	if (ft_strlen(av[1]) == 0)
@@ -26,9 +65,15 @@ int	ft_parsing(int ac, char **av, t_vars *vars)
 	vars->fd = open(av[1], O_RDONLY);
 	if (vars->fd < 1)
 		return (fput("ERROR CANT OPEN FILE\n"));
-	vars->name = ft_strjoin("fdf ", av[1]);
-	vars->tab = gnl(vars);
+	gnl(vars);
+	fput("1\n");
 	if (vars->err == 1)
-		return (ft_free_array(vars->tab, vars->winy), fput("ERROR MAP\n"));
+		return (ft_freelktab(vars), fput("ERROR MAP\n"));
+	fput("1a\n");
+	if (!ft_linkinit(vars))
+		return (ft_freelktab(vars), 0);
+	fput("1b\n");
+	vars->name = ft_strjoinc("fdf ", av[1]);
+	fput("1c\n");
 	return (1);
 }

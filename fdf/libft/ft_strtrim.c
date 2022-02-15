@@ -6,11 +6,23 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 02:52:13 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/03 14:49:22 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/10 23:54:55 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static size_t	strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	if (!s)
+		return (0);
+	while (s[i])
+		i++;
+	return (i);
+}
 
 static int	fstrchr(const char *set, char c)
 {
@@ -35,7 +47,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 	if (!s1 || !set)
 		return (0);
-	end = ft_strlen(s1) - 1;
+	end = strlen(s1) - 1;
 	start = 0;
 	while (start <= end && fstrchr(set, s1[start]))
 		start++;

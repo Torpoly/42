@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 13:48:32 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/07 16:07:31 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/11 01:59:54 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,27 @@ static char	*ft_shorten(char *s1, char *s2, int i)
 	return (NULL);
 }
 
-static char	*ft_free(char *s)
+static int	ft_countpoints(char *s, t_vars *vars)
 {
-	free(s);
-	return (NULL);
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	if (ft_isdigit(s[0]))
+		count++;
+	while (s[i] != '\n')
+	{
+		while (ft_isdigit(s[i]))
+			i++;
+		if (s[i] == ' ')
+			count++;
+		while (s[i] == ' ')
+			i++;
+		if (s[i] != '-' && (!ft_isdigit(s[i])) && s[i] != '\n')
+			return (vars->err = 1, 0);
+	}
+	return (count);
 }
 
 static char	*ft_read(int fd, char *s)
@@ -52,7 +69,7 @@ static char	*ft_read(int fd, char *s)
 		return (NULL);
 	s = ft_shorten(s, s_read, 2);
 	if (!s)
-		return (ft_free(s_read));
+		return (free(s_read), NULL);
 	while (i > 0 && ft_strchr(s, '\n'))
 	{
 		i = read(fd, s_read, 100);
@@ -65,7 +82,7 @@ static char	*ft_read(int fd, char *s)
 	}
 	free(s_read);
 	if (s[0] == '\0')
-		return (ft_free(s));
+		return (free(s), NULL);
 	return (s);
 }
 
@@ -84,17 +101,35 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-char	**gnl(t_vars *vars)
+int	gnl(t_vars *vars)
 {
-	char	**tab;
+	t_tab	*tab;
 
+	tab = malloc(sizeof(t_tab));
+	if (!tab)
+		return (0);
+	vars->tab = tab;
 	while (1)
 	{
-		tab[vars->winy] = get_next_line(vars->fd);
-		if (tab[vars->winy] == 0)
+		tab->s = get_next_line(vars->fd);
+		fput(tab->s);
+		fput("\n");
+		if (vars->winy == 0)
+		{
+			vars->winx = ft_countpoints(tab->s, vars);
+			tab->next = NULL;
+		}
+		if (tab->s == 0)
 			break ;
+		if (vars->winx != ft_countpoints(tab->s, vars))
+			return (vars->err = 1, 0);
+		tab->next = malloc(sizeof(t_tab));
+		if (!tab->next)
+			return (vars->err = 1, 0);
 		vars->winy++;
+		tab = tab->next;
 	}
 	close(vars->fd);
-	return (tab);
+	tab->next = NULL;
+	return (1);
 }

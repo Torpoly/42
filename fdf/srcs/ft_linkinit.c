@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_linkinit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:52:51 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/15 18:46:47 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/17 01:17:06 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "math.h"
 
-static void	ft_freelk(t_vars *vars)
+void	ft_freelk(t_vars *vars)
 {
 	t_map	*m;
 
-	while (vars->map->next != NULL)
+	while (vars->m3->next != NULL)
 	{
-		m = vars->map;
-		vars->map = vars->map->next;
+		m = vars->m3;
+		vars->m3 = vars->m3->next;
 		free(m);
 	}
-	free(vars->map);
+	free(vars->m3);
 }
 
 static void	ft_getrel(t_vars *vars, t_map *map, int px, int py)
@@ -32,8 +32,7 @@ static void	ft_getrel(t_vars *vars, t_map *map, int px, int py)
 	map->x = px;
 	map->y = py;
 	map->z = ft_atoip(vars);
-	printf("__relx %d rely  %d_ \n", map->x, map->y);
-	fput("3b\n");
+	printf("_x_%d  _y_%d _z_%d\n", map->x, map->y, map->z);
 	if (vars->posx == vars->winx)
 	{
 		vars->posx = 0;
@@ -49,26 +48,28 @@ static int	ft_initstk(t_vars *vars)
 {
 	t_map	*m;
 
-	fput("2\n");
 	vars->err = 0;
 	vars->stdc = 0x00FFFF;
 	vars->posx = 0;
 	vars->posy = 0;
+	vars->zoom = 15;
+	vars->alt = 1;
 	vars->a = 0;
+	vars->movex = vars->size / 3;
+	vars->movey = vars->size / 3;
 	vars->l = vars->tab;
+	//vars->adr = malloc(sizeof(char *));
+	//if (!vars->adr)
+	//	return (vars->err = 1, 0);
 	fput(vars->tab->s);
 	vars->s = vars->l->s;
-	fput(vars->s);
-	fput("2a\n");
 	m = malloc(sizeof(t_map));
 	if (!m)
 		return (vars->err = 1, 0);
-	fput("2b\n");
 	ft_getrel(vars, m, vars->posx, vars->posy);
-	fput("2c\n");
 	m->c = vars->stdc;
 	m->next = NULL;
-	vars->map = m;
+	vars->m3 = m;
 	return (1);
 }
 
@@ -79,9 +80,7 @@ int	ft_linkinit(t_vars *vars)
 	fput("1\n");
 	if (!ft_initstk(vars))
 		return (0);
-	fput("1\n");
-	map = vars->map;
-	vars->topl = map;
+	map = vars->m3;
 	while (vars->err == 0 && vars->posy < vars->winy)
 	{
 		fput("loop\n");
@@ -89,7 +88,6 @@ int	ft_linkinit(t_vars *vars)
 		if (!map->next)
 			return (ft_freelk(vars), 0);
 		map = map->next;
-		printf("%d %d_____ %d %d \n", vars->posx, vars->winx, vars->posy, vars->winy);
 		ft_getrel(vars, map, (float)vars->posx, (float)vars->posy);
 		map->c = vars->stdc;
 	}

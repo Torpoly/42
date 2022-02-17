@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+         #
+#    By: rpol <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/03 14:17:45 by rpol              #+#    #+#              #
-#    Updated: 2022/02/11 14:41:09 by rpol             ###   ########.fr        #
+#    Updated: 2022/02/16 19:52:22 by rpol             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ MLXFLAGS = -lXext -lX11 -lm
 
 NAME = fdf
 SRCS_NAME = fdf.c ft_linkinit.c ft_parsing.c ft_split_ps.c get_next_line.c \
-			get_next_line_utils.c
+			get_next_line_utils.c ft_draw.c
 SRCS_PATH = srcs
 SRCS = $(addprefix $(SRCS_PATH)/, $(SRCS_NAME))
 INCS_NAME = fdf.h

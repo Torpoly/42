@@ -3,39 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 14:24:07 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/15 18:46:51 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/17 01:39:04 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-static int	ft_draw(t_vars *vars, int x, int y)
-{
-	t_map	*map;
-	float	px;
-	float	py;
-	float	z;
-	float	a;
-
-	printf("__relx %d rely  %d_ \n", vars->map->x, vars->map->y);
-	map = vars->topl;
-	a = (float)vars->a;
-	while (map != NULL)
-	{
-		px = (float)map->x;
-		py = (float)map->y;
-		z = (float)map->z;
-		x = (((int)(((px * cosf(a)) + (py * cosf(a + 120)) + (z * cosf(a - 120)))) * 15) + (vars->size / 3));
-		y = (((int)(((px * sinf(a)) + (py * sinf(a + 120)) + (z * sinf(a - 120)))) * 15) + (100));
-		printf("__relx %d rely  %d_ \n", x, y);
-		mlx_pixel_put(vars->mlx, vars->win, x, y, map->c);
-		map = map->next;
-	}
-	return (1);
-}
 
 int	fput(char *s)
 {
@@ -43,29 +18,46 @@ int	fput(char *s)
 	return (0);
 }
 
-static int	turn(int keycode, t_vars *vars)
+static void	ft_destroy(t_vars *vars)
 {
-	if (keycode == 0x0061)
-	{
-		mlx_destroy_window(vars->mlx, vars->win);
-		vars->win = mlx_new_window(vars->mlx, vars->size, vars->size, vars->name);
-		vars->a += 30;
-		ft_draw(vars, 0, 0);
-		return (0);
-	}
-	return (1);
+	fput("BYYYYYYYYYYYYYYYYYYYEEEEEEEEE\n");
+	free(vars->name);
+	ft_freelk(vars);
+	mlx_loop_end(vars->mlx);
+    mlx_destroy_window(vars->mlx, vars->win);
+    fput("window destroyed\n");
+    mlx_destroy_display(vars->mlx);
+    fput("display destroyed\n");
+    free(vars->mlx);
+	fput("HASTA LA VISTA \n");
+	exit (0);
 }
 
-static int	escape(int keycode, t_vars *vars)
+static int	keypress(int keycode, t_vars *vars)
 {
+	if (keycode == 0x0051)
+		return (vars->a -= 30, ft_draw(vars));
+	if (keycode == 0x0045)
+		return (vars->a += 30, ft_draw(vars));
+	if (keycode == 0x0057)
+		return (vars->movex -= 20, ft_draw(vars));
+	if (keycode == 0x0053)
+		return (vars->movex += 20, ft_draw(vars));
+	if (keycode == 0x0041)
+		return (vars->movey -= 20, ft_draw(vars));
+	if (keycode == 0x0044)
+		return (vars->movey += 20, ft_draw(vars));
+	if (keycode == 0x005a)
+		return (vars->alt += 0.1, ft_draw(vars));
+	if (keycode == 0x0058)
+		return (vars->alt -= 0.1, ft_draw(vars));
+	if (keycode == 0x0046)
+		return (vars->zoom += 1, ft_draw(vars));
+	if (keycode == 0x0052)
+		return (vars->zoom -= 1, ft_draw(vars));
 	if (keycode == 0xff1b)
-	{
-		mlx_destroy_window(vars->mlx, vars->win);
-		mlx_destroy_display(vars->mlx);
-		vars->win = 0;
-		return (0);
-	}
-	return (1);
+		return (ft_destroy(vars), 0);
+	return (0);
 }
 
 int	main(int ac, char **av)
@@ -79,8 +71,7 @@ int	main(int ac, char **av)
 	vars.win = mlx_new_window(vars.mlx, vars.size, vars.size, vars.name);
 	fput("here\n");
 	ft_draw(&vars);
-	mlx_key_hook(vars.win, escape, &vars);
-	mlx_key_hook(vars.win, turn, &vars);
+	mlx_hook(vars.win, 2, 1L << 0, keypress, &vars);
 	if (vars.win == 0)
 		return (write(1, "BYEBYE\n", 7), 1);
 	mlx_loop(vars.mlx);

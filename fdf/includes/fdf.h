@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 14:16:22 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/15 18:46:49 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/17 00:48:32 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@
 
 typedef struct s_map {
 	int				x;
+	int				rx;
 	int				y;
+	int				ry;
 	int				z;
 	int				c;
 	struct s_map	*next;
@@ -39,6 +41,10 @@ typedef struct s_vars {
 	void	*mlx;
 	void	*win;
 	void	*img;
+	int		*lsz;
+	int		*bitsz;
+	int		*endi;
+	char	*adr;
 	int		size;
 	char	*name;
 	int		fd;
@@ -49,13 +55,20 @@ typedef struct s_vars {
 	char	*s;
 	int		err;
 	int		posx;
-	int		zval;
 	int		posy;
 	int		a;
 	int		stdc;
-	t_map	*map;
+	float	alt;
+	int		zoom;
+	int		movex;
+	int		movey;
+	t_map	*m3;
 	t_map	*topl;
 }				t_vars;
+
+/*IN FT_DRAW.C*/
+
+int		ft_draw(t_vars *vars);
 
 /*IN FDF.C*/
 
@@ -92,6 +105,8 @@ char	**ft_free_array(char **sa, int i);
 char	**ft_split_ps(char *s, char c, int i);
 
 /* ft_linkinit.c */
+
+void	ft_freelk(t_vars *vars);
 
 int		ft_linkinit(t_vars *vars);
 

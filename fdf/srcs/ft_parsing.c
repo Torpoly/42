@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 10:18:27 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/11 13:27:29 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/16 21:30:31 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,15 @@ int	ft_atoip(t_vars *vars)
 	sign = 1;
 	nb = 0;
 	str = vars->s;
-	fput(str);
-	fput("4\n");
 	while (*str == ' ')
 		str++;
-	fput("4a\n");
 	if (*str == '-')
 		sign = -1;
-	fput("4b\n");
 	while (*str >= '0' && *str <= '9')
 	{
 		nb = (nb * 10) + (*str - '0');
 		str++;
 	}
-	fput("4c\n");
 	vars->s = str;
 	return (nb * sign);
 }
@@ -69,11 +64,8 @@ int	ft_parsing(int ac, char **av, t_vars *vars)
 	fput("1\n");
 	if (vars->err == 1)
 		return (ft_freelktab(vars), fput("ERROR MAP\n"));
-	fput("1a\n");
 	if (!ft_linkinit(vars))
 		return (ft_freelktab(vars), 0);
-	fput("1b\n");
 	vars->name = ft_strjoinc("fdf ", av[1]);
-	fput("1c\n");
 	return (1);
 }

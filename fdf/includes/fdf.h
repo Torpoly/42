@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 14:16:22 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/17 00:48:32 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/18 20:02:29 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ char	**ft_free_array(char **sa, int i);
 char	**ft_split_ps(char *s, char c, int i);
 
 /* ft_linkinit.c */
+
+void	ft_freelka(t_vars *v);
 
 void	ft_freelk(t_vars *vars);
 

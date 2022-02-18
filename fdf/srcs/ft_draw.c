@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_draw.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 19:31:39 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/17 01:33:33 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/18 19:07:33 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static int	ft_2d(t_vars *v, int x, int y, double b)
 	b = (((double)120 * 3.1415926535) / 180);
 	while (map != NULL)
 	{
-		px = map->x + v->winy;
-		py = map->y + v->winy;
+		px = map->x;
+		py = map->y;
 		printf("__x:%d__y:%d__", map->x, map->y);
 		z = (double)map->z * v->alt;
 		x = (int)((px * cos(a)) + (py * cos(a + b)) + (z * cos(a - b)));
@@ -57,7 +57,27 @@ static int	ft_2d(t_vars *v, int x, int y, double b)
 	return (0);
 }*/
 
-static int	ft_bsh(t_vars *v, t_map *m0, t_map *m1)
+void	ft_bsh(t_vars *v, t_map *m0, t_map *m1)
+{
+ 
+	int dx = abs(m1->rx - m0->rx), sx = m0->rx < m1->rx ? 1 : -1;
+	int dy = abs(m1->ry - m0->ry), sy = m0->ry < m1->ry ? 1 : -1;
+	int err = (dx>dy ? dx : -dy)/2, e2;
+	int	x, y ;
+ 
+	x = m0->rx;
+	y = m0->ry;
+  for(;;)
+  {
+    mlx_pixel_put(v->mlx, v->win, x, y, v->stdc);
+    if (x == m1->rx && y == m1->ry) break;
+    e2 = err;
+    if (e2 >-dx) { err -= dy; x += sx; }
+    if (e2 < dy) { err += dx; y += sy; }
+  }
+}
+
+/*static int	ft_bsh(t_vars *v, t_map *m0, t_map *m1)
 {
 	int	dx;
 	int	dy;
@@ -86,23 +106,27 @@ static int	ft_bsh(t_vars *v, t_map *m0, t_map *m1)
 		}
 	}
 	return (0);
-}
+}*/
 
 static int	ft_draw2d(t_vars *v)
 {
 	t_map	*m;
 
-	m = v->m3;
+	m = v->m3->next;
 	v->topl = v->m3;
 	while (m->next != NULL)
 	{
-		if (m->y > 0)
+		while (m->y < 1 && m->x < (v->winx))
 		{
-			ft_bsh(v, m, v->topl);
-			v->topl = v->topl->next;
+			printf("next__rx:%d__ry:%d__", m->x, m->y);
+			printf("__rx:%d__ry:%d__\n", m->next->x, m->next->y);
+			ft_bsh(v, m, m->next);
+			m = m->next;
 		}
 		if (m->x < v->winx)
 			ft_bsh(v, m, m->next);
+		ft_bsh(v, m, v->topl);
+		v->topl = v->topl->next;
 		m = m->next;
 	}
 	return (0);

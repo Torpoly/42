@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 14:24:07 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/17 01:39:04 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/18 20:04:59 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void	ft_destroy(t_vars *vars)
 	fput("BYYYYYYYYYYYYYYYYYYYEEEEEEEEE\n");
 	free(vars->name);
 	ft_freelk(vars);
+	ft_freelka(vars);
 	mlx_loop_end(vars->mlx);
     mlx_destroy_window(vars->mlx, vars->win);
     fput("window destroyed\n");

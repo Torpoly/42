@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_linkinit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:52:51 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/17 01:17:06 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/18 20:02:02 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,22 @@ void	ft_freelk(t_vars *vars)
 	}
 	free(vars->m3);
 }
+
+void	ft_freelka(t_vars *v)
+{
+	t_tab	*t;
+
+	while (v->tab->next != NULL)
+	{
+		t = v->tab;
+		v->tab = v->tab->next;
+		free(t->s);
+		free(t);
+	}
+	free(v->tab->s);
+	free(v->tab);
+}
+
 
 static void	ft_getrel(t_vars *vars, t_map *map, int px, int py)
 {

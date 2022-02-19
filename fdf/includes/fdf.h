@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 14:16:22 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/18 20:02:29 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/19 00:56:33 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ typedef struct s_vars {
 	void	*mlx;
 	void	*win;
 	void	*img;
-	int		*lsz;
-	int		*bitsz;
-	int		*endi;
+	int		lsz;
+	int		bitsz;
+	int		endi;
 	char	*adr;
 	int		size;
 	char	*name;
@@ -58,10 +58,16 @@ typedef struct s_vars {
 	int		posy;
 	int		a;
 	int		stdc;
-	float	alt;
+	double	alt;
 	int		zoom;
 	int		movex;
 	int		movey;
+	int		dy;
+	int		dx;
+	int		sx;
+	int		sy;
+	int		er;
+	int		e2;
 	t_map	*m3;
 	t_map	*topl;
 }				t_vars;
@@ -75,6 +81,8 @@ int		ft_draw(t_vars *vars);
 int		fput(char *s);
 
 /*IN FT_PARSING.C*/
+
+void	ft_init_bsh(t_vars *vars, t_map *m0, t_map *m1);
 
 int		ft_atoip(t_vars *vars);
 

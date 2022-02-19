@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 14:24:07 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/18 20:04:59 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/19 00:38:15 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,37 +25,39 @@ static void	ft_destroy(t_vars *vars)
 	ft_freelk(vars);
 	ft_freelka(vars);
 	mlx_loop_end(vars->mlx);
-    mlx_destroy_window(vars->mlx, vars->win);
-    fput("window destroyed\n");
-    mlx_destroy_display(vars->mlx);
-    fput("display destroyed\n");
-    free(vars->mlx);
+	mlx_destroy_window(vars->mlx, vars->win);
+	fput("window destroyed\n");
+	mlx_destroy_display(vars->mlx);
+	fput("display destroyed\n");
+	free(vars->mlx);
 	fput("HASTA LA VISTA \n");
 	exit (0);
 }
 
 static int	keypress(int keycode, t_vars *vars)
 {
-	if (keycode == 0x0051)
+	if (keycode == 0x0071)
 		return (vars->a -= 30, ft_draw(vars));
-	if (keycode == 0x0045)
+	if (keycode == 0x0065)
 		return (vars->a += 30, ft_draw(vars));
-	if (keycode == 0x0057)
-		return (vars->movex -= 20, ft_draw(vars));
-	if (keycode == 0x0053)
-		return (vars->movex += 20, ft_draw(vars));
-	if (keycode == 0x0041)
+	if (keycode == 0x0073)
 		return (vars->movey -= 20, ft_draw(vars));
-	if (keycode == 0x0044)
+	if (keycode == 0x0077)
 		return (vars->movey += 20, ft_draw(vars));
-	if (keycode == 0x005a)
+	if (keycode == 0x0061)
+		return (vars->movex -= 20, ft_draw(vars));
+	if (keycode == 0x0064)
+		return (vars->movex += 20, ft_draw(vars));
+	if (keycode == 0x0072)
 		return (vars->alt += 0.1, ft_draw(vars));
-	if (keycode == 0x0058)
+	if (keycode == 0x0066)
 		return (vars->alt -= 0.1, ft_draw(vars));
-	if (keycode == 0x0046)
+	if (keycode == 0x007a)
 		return (vars->zoom += 1, ft_draw(vars));
-	if (keycode == 0x0052)
+	if (keycode == 0x0078)
 		return (vars->zoom -= 1, ft_draw(vars));
+	if (keycode == 0x0063)
+		return (vars->stdc += 42, ft_draw(vars));
 	if (keycode == 0xff1b)
 		return (ft_destroy(vars), 0);
 	return (0);

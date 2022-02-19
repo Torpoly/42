@@ -6,12 +6,11 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:52:51 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/18 20:02:02 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/19 00:39:34 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "math.h"
 
 void	ft_freelk(t_vars *vars)
 {
@@ -40,7 +39,6 @@ void	ft_freelka(t_vars *v)
 	free(v->tab->s);
 	free(v->tab);
 }
-
 
 static void	ft_getrel(t_vars *vars, t_map *map, int px, int py)
 {
@@ -74,9 +72,6 @@ static int	ft_initstk(t_vars *vars)
 	vars->movex = vars->size / 3;
 	vars->movey = vars->size / 3;
 	vars->l = vars->tab;
-	//vars->adr = malloc(sizeof(char *));
-	//if (!vars->adr)
-	//	return (vars->err = 1, 0);
 	fput(vars->tab->s);
 	vars->s = vars->l->s;
 	m = malloc(sizeof(t_map));

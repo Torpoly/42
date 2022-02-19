@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 13:48:32 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/11 01:59:54 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/19 00:35:04 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,6 @@ int	gnl(t_vars *vars)
 	while (1)
 	{
 		tab->s = get_next_line(vars->fd);
-		fput(tab->s);
-		fput("\n");
 		if (vars->winy == 0)
 		{
 			vars->winx = ft_countpoints(tab->s, vars);
@@ -129,7 +127,5 @@ int	gnl(t_vars *vars)
 		vars->winy++;
 		tab = tab->next;
 	}
-	close(vars->fd);
-	tab->next = NULL;
-	return (1);
+	return (close(vars->fd), tab->next = NULL, 1);
 }

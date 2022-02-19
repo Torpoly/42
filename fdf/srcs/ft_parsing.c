@@ -6,11 +6,29 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 10:18:27 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/18 20:04:31 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/19 01:02:50 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	ft_init_bsh(t_vars *v, t_map *m0, t_map *m1)
+{
+	v->dx = abs(m1->rx - m0->rx);
+	if (m0->rx < m1->rx)
+		v->sx = 1;
+	else
+		v->sx = -1;
+	v->dy = abs(m1->ry - m0->ry);
+	if (m0->ry < m1->ry)
+		v->sy = 1;
+	else
+		v->sy = -1;
+	if (v->dx > v->dy)
+		v->er = v->dx / 2;
+	else
+		v->er = -v->dy / 2;
+}
 
 int	ft_atoip(t_vars *vars)
 {

@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 13:48:32 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/19 04:11:34 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/19 14:34:51 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,8 @@ int	gnl(t_vars *vars)
 		}
 		if (tab->s == 0)
 			break ;
-		//if (vars->winx != ft_countpoints(tab->s, vars))
-		//	return (vars->err = 1, 0);
+		if (vars->winx != ft_countpoints(tab->s, vars))
+			return (vars->err = 1, 0);
 		tab->next = malloc(sizeof(t_tab));
 		if (!tab->next)
 			return (vars->err = 1, 0);

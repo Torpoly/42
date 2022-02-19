@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 14:16:22 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/19 02:22:35 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/19 18:30:16 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,11 @@ char	*ft_line(char *s);
 
 char	*ft_cut(char *s, char *line);
 
-/* ft_split_ps.c */
+/* ft_split_ps.c
 
 char	**ft_free_array(char **sa, int i);
 
-char	**ft_split_ps(char *s, char c, int i);
+char	**ft_split_ps(char *s, char c, int i);*/
 
 /* ft_linkinit.c */
 

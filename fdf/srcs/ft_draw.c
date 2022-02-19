@@ -6,13 +6,13 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 19:31:39 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/19 04:15:31 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/19 14:20:47 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int	ft_2d(t_vars *v, int x, int y, double a)
+static int	ft_2d(t_vars *v, double x, double y, double a)
 {
 	t_map	*map;
 	double	px;
@@ -26,10 +26,10 @@ static int	ft_2d(t_vars *v, int x, int y, double a)
 		px = map->x;
 		py = map->y;
 		z = (double)map->z * v->alt;
-		x = (int)((px - z) * cos(a));
-		map->rx = (x * v->zoom) + v->movex;
-		y = (int)(py + (px + z) * sin(a));
-		map->ry = (y * v->zoom) + v->movey;
+		x = (px * cos(a)) - (py * sin(a));
+		y = (py * cos(a)) + (px * sin(a));
+		map->rx = ((x - y) * v->zoom) + v->movex;
+		map->ry = (-z + ((x + y) * v->zoom)) + v->movey;
 		map = map->next;
 	}
 	return (0);

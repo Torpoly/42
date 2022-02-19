@@ -6,35 +6,30 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 19:31:39 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/19 01:20:24 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/19 04:15:31 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int	ft_2d(t_vars *v, int x, int y, double b)
+static int	ft_2d(t_vars *v, int x, int y, double a)
 {
 	t_map	*map;
 	double	px;
 	double	py;
 	double	z;
-	double	a;
 
 	map = v->m3;
 	a = (((double)v->a * 3.1415926535) / 180);
-	b = (((double)120 * 3.1415926535) / 180);
 	while (map != NULL)
 	{
 		px = map->x;
 		py = map->y;
-		printf("__x:%d__y:%d__", map->x, map->y);
 		z = (double)map->z * v->alt;
-		x = (int)((px * cos(a)) + (py * cos(a + b)) + (z * cos(a - b)));
+		x = (int)((px - z) * cos(a));
 		map->rx = (x * v->zoom) + v->movex;
-		y = (int)((px * sin(a)) + (py * sin(a + b)) + (z * sin(a - b)));
+		y = (int)(py + (px + z) * sin(a));
 		map->ry = (y * v->zoom) + v->movey;
-		printf("__rx:%d__ry:%d__\n", x, y);
-		printf("__rx:%d__ry:%d__\n", map->rx, map->ry);
 		map = map->next;
 	}
 	return (0);
@@ -49,7 +44,7 @@ static int	img_put_pixel(int x, int y, t_vars *v)
 	adrtmp = v->adr;
 	lsz = v->lsz;
 	bitsz = v->bitsz;
-	if (x >= 0 && y >= 0 && x <= v->size && y <= v->size)
+	if (x > 0 && y > 0 && x < v->size && y < v->size)
 	{
 		adrtmp += (y * lsz + (x * ((bitsz) / 8)));
 		*(unsigned int *)adrtmp = (unsigned int)v->stdc;
@@ -57,7 +52,7 @@ static int	img_put_pixel(int x, int y, t_vars *v)
 	return (0);
 }
 
-void	ft_bsh(t_vars *v, t_map *m0, t_map *m1)
+static void	ft_bsh(t_vars *v, t_map *m0, t_map *m1)
 {
 	int	x;
 	int	y;
@@ -88,42 +83,36 @@ static int	ft_draw2d(t_vars *v)
 {
 	t_map	*m;
 
-	m = v->m3->next;
+	m = v->m3;
 	v->topl = v->m3;
 	while (m->next != NULL)
 	{
-		while (m->y < 1 && m->x < (v->winx))
+		while (m->y < 1 && m->x < (v->winx - 1))
 		{
-			printf("nextl__rx:%d__ry:%d__", m->x, m->y);
-			printf("__rx:%d__ry:%d__\n", m->next->x, m->next->y);
 			ft_bsh(v, m, m->next);
 			m = m->next;
 		}
-		if (m->x < v->winx)
+		if (m->x < v->winx - 1)
 		{
-			printf("nextl__rx:%d__ry:%d__", m->x, m->y);
-			printf("__rx:%d__ry:%d__\n", m->next->x, m->next->y);
 			ft_bsh(v, m, m->next);
 		}
-		printf("nextl__rx:%d__ry:%d__", m->x, m->y);
-		printf("__rx:%d__ry:%d__\n", v->topl->x, v->topl->y);
 		ft_bsh(v, m, v->topl);
-		v->topl = v->topl->next;
+		if (m->y > 0)
+			v->topl = v->topl->next;
 		m = m->next;
 	}
-	return (0);
+	ft_bsh(v, m, v->topl);
+	return (1);
 }
 
 int	ft_draw(t_vars *v)
 {
 	ft_2d(v, 0, 0, 0);
-	printf("icccciiii\n");
 	v->img = mlx_new_image(v->mlx, 800, 800);
-	printf("icccciiii1\n");
+	if (!v->img)
+		return (fput("ERR IMG\n"), ft_destroy(v), 0);
 	v->adr = mlx_get_data_addr(v->img, &v->bitsz, &v->lsz, &v->endi);
-	printf("icccciiii2\n");
 	ft_draw2d(v);
-	printf("icccciiii3\n");
 	mlx_put_image_to_window(v->mlx, v->win, v->img, 0, 0);
 	mlx_destroy_image(v->mlx, v->img);
 	return (1);

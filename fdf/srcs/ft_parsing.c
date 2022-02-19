@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 10:18:27 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/19 01:02:50 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/19 04:17:25 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int	ft_parsing(int ac, char **av, t_vars *vars)
 	if (vars->fd < 1)
 		return (fput("ERROR CANT OPEN FILE\n"));
 	gnl(vars);
-	fput("1\n");
 	if (vars->err == 1)
 		return (ft_freelka(vars), fput("ERROR MAP\n"));
 	if (!ft_linkinit(vars))

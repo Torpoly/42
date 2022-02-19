@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 14:16:22 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/19 00:56:33 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/19 02:22:35 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ typedef struct s_vars {
 int		ft_draw(t_vars *vars);
 
 /*IN FDF.C*/
+
+void	ft_destroy(t_vars *vars);
 
 int		fput(char *s);
 

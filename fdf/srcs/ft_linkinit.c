@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:52:51 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/19 00:39:34 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/19 04:19:49 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,10 @@ void	ft_freelka(t_vars *v)
 
 static void	ft_getrel(t_vars *vars, t_map *map, int px, int py)
 {
-	fput("3a\n");
 	map->x = px;
 	map->y = py;
 	map->z = ft_atoip(vars);
-	printf("_x_%d  _y_%d _z_%d\n", map->x, map->y, map->z);
-	if (vars->posx == vars->winx)
+	if (vars->posx == vars->winx - 1)
 	{
 		vars->posx = 0;
 		vars->posy++;
@@ -68,11 +66,10 @@ static int	ft_initstk(t_vars *vars)
 	vars->posy = 0;
 	vars->zoom = 15;
 	vars->alt = 1;
-	vars->a = 0;
+	vars->a = 30;
 	vars->movex = vars->size / 3;
 	vars->movey = vars->size / 3;
 	vars->l = vars->tab;
-	fput(vars->tab->s);
 	vars->s = vars->l->s;
 	m = malloc(sizeof(t_map));
 	if (!m)
@@ -88,21 +85,18 @@ int	ft_linkinit(t_vars *vars)
 {
 	t_map	*map;
 
-	fput("1\n");
 	if (!ft_initstk(vars))
 		return (0);
 	map = vars->m3;
 	while (vars->err == 0 && vars->posy < vars->winy)
 	{
-		fput("loop\n");
 		map->next = malloc(sizeof(t_map));
 		if (!map->next)
 			return (ft_freelk(vars), 0);
 		map = map->next;
-		ft_getrel(vars, map, (float)vars->posx, (float)vars->posy);
+		ft_getrel(vars, map, vars->posx, vars->posy);
 		map->c = vars->stdc;
 	}
 	map->next = NULL;
-	fput("end link init\n");
 	return (1);
 }

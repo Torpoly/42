@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 14:24:07 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/19 00:38:15 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/19 02:58:46 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,22 @@ int	fput(char *s)
 	return (0);
 }
 
-static void	ft_destroy(t_vars *vars)
+static void	fmlx(t_vars *vars)
 {
-	fput("BYYYYYYYYYYYYYYYYYYYEEEEEEEEE\n");
+	free(vars->name);
+	ft_freelk(vars);
+	ft_freelka(vars);
+	if (vars->mlx)
+	{
+		free(vars->mlx);
+		fput("ERROR WIN CREATION\n");
+	}
+	else
+		fput("ERROR MLX INIT\n");
+}
+
+void	ft_destroy(t_vars *vars)
+{
 	free(vars->name);
 	ft_freelk(vars);
 	ft_freelka(vars);
@@ -41,9 +54,9 @@ static int	keypress(int keycode, t_vars *vars)
 	if (keycode == 0x0065)
 		return (vars->a += 30, ft_draw(vars));
 	if (keycode == 0x0073)
-		return (vars->movey -= 20, ft_draw(vars));
-	if (keycode == 0x0077)
 		return (vars->movey += 20, ft_draw(vars));
+	if (keycode == 0x0077)
+		return (vars->movey -= 20, ft_draw(vars));
 	if (keycode == 0x0061)
 		return (vars->movex -= 20, ft_draw(vars));
 	if (keycode == 0x0064)
@@ -69,13 +82,13 @@ int	main(int ac, char **av)
 
 	if (!ft_parsing(ac, av, &vars))
 		return (0);
-	fput("2\n");
 	vars.mlx = mlx_init();
+	if (!(vars.mlx))
+		return (fmlx(&vars), 0);
 	vars.win = mlx_new_window(vars.mlx, vars.size, vars.size, vars.name);
-	fput("here\n");
+	if (!vars.win)
+		return (fmlx(&vars), 0);
 	ft_draw(&vars);
 	mlx_hook(vars.win, 2, 1L << 0, keypress, &vars);
-	if (vars.win == 0)
-		return (write(1, "BYEBYE\n", 7), 1);
 	mlx_loop(vars.mlx);
 }

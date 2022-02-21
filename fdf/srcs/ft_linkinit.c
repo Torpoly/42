@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:52:51 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/20 23:35:46 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/21 12:26:52 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	ft_getrel(t_vars *vars, t_map *map, int px, int py)
 {
 	map->x = px;
 	map->y = py;
-	map->z = ft_atoip(vars);
+	map->z = ft_atoip(vars, 1, 0);
 	if (vars->posx == vars->winx - 1)
 	{
 		vars->posx = 0;
@@ -65,7 +65,7 @@ static int	ft_initstk(t_vars *vars)
 	vars->posx = 0;
 	vars->posy = 0;
 	vars->zoom = 0.5 * (vars->size / vars->winx);
-	vars->alt = 1;
+	vars->alt = 0.5;
 	vars->a = -30;
 	vars->movex = vars->size / 4;
 	vars->movey = vars->size / 5;

@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 10:18:27 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/21 01:20:13 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/21 12:27:24 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,18 @@ void	ft_init_bsh(t_vars *v, t_map *m0, t_map *m1)
 		v->er = -v->dy / 2;
 }
 
-int	ft_atoip(t_vars *vars)
+int	ft_atoip(t_vars *vars, int sign, int nb)
 {
 	char	*str;
-	int		sign;
-	int		nb;
 
-	sign = 1;
-	nb = 0;
 	str = vars->s;
 	while (*str == ' ')
 		str++;
 	if (*str == '-')
+	{
 		sign = -1;
+		str++;
+	}
 	while (*str >= '0' && *str <= '9')
 	{
 		nb = (nb * 10) + (*str - '0');

@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 19:31:39 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/21 01:30:59 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/21 12:27:01 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	ft_2d(t_vars *v, double x, double y, double a)
 		x = (px * cos(a)) - (py * sin(a));
 		y = (py * cos(a)) + (px * sin(a));
 		map->rx = ((x - y) * v->zoom) + v->movex;
-		map->ry = (-z + ((x + y) * v->zoom)) + v->movey;
+		map->ry = ((-z + x + y) * v->zoom) + v->movey;
 		map = map->next;
 	}
 	return (0);

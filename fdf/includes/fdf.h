@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 14:16:22 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/21 01:32:41 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/21 12:17:45 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int		fput(char *s);
 
 void	ft_init_bsh(t_vars *vars, t_map *m0, t_map *m1);
 
-int		ft_atoip(t_vars *vars);
+int		ft_atoip(t_vars *vars, int sign, int nb);
 
 int		ft_parsing(int ac, char **av, t_vars *vars);
 

@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 14:16:22 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/19 18:30:16 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/21 01:32:41 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int		ft_parsing(int ac, char **av, t_vars *vars);
 
 /*IN GET_NEXT_LINE.C*/
 
-char	*get_next_line(int fd);
+char	*get_next_line(int fd, t_vars *vars);
 
 int		gnl(t_vars *vars);
 
@@ -107,12 +107,6 @@ char	*ft_strjoin(char *s1, char *s2);
 char	*ft_line(char *s);
 
 char	*ft_cut(char *s, char *line);
-
-/* ft_split_ps.c
-
-char	**ft_free_array(char **sa, int i);
-
-char	**ft_split_ps(char *s, char c, int i);*/
 
 /* ft_linkinit.c */
 

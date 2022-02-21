@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 19:31:39 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/19 14:20:47 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/21 01:30:59 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ static void	ft_bsh(t_vars *v, t_map *m0, t_map *m1)
 	while (1)
 	{
 		img_put_pixel(x, y, v);
-		if (x == m1->rx && y == m1->ry)
+		if ((x == m1->rx && y == m1->ry)
+			|| (m1->x == 0 && m0->x == v->winx - 1))
 			break ;
 		v->e2 = v->er;
 		if (v->e2 > -v->dx)

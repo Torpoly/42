@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 10:18:27 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/19 04:17:25 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/21 01:20:13 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@ int	ft_atoip(t_vars *vars)
 		nb = (nb * 10) + (*str - '0');
 		str++;
 	}
+	if (*str == ',')
+	{
+		str++;
+		while (ft_isalnum(*str))
+			str++;
+	}
 	vars->s = str;
 	return (nb * sign);
 }
@@ -68,6 +74,8 @@ int	ft_parsing(int ac, char **av, t_vars *vars)
 	gnl(vars);
 	if (vars->err == 1)
 		return (ft_freelka(vars), fput("ERROR MAP\n"));
+	if (vars->err == 2)
+		return (ft_freelka(vars), fput("ERROR GNL/MALLOC\n"));
 	if (!ft_linkinit(vars))
 		return (ft_freelka(vars), 0);
 	vars->name = ft_strjoinc("fdf ", av[1]);

@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:52:51 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/19 14:31:53 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/20 23:35:46 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ static int	ft_initstk(t_vars *vars)
 	vars->stdc = 0x00FFFF;
 	vars->posx = 0;
 	vars->posy = 0;
-	vars->zoom = 15;
+	vars->zoom = 0.5 * (vars->size / vars->winx);
 	vars->alt = 1;
-	vars->a = 0;
-	vars->movex = vars->size / 2;
-	vars->movey = vars->size / 4;
+	vars->a = -30;
+	vars->movex = vars->size / 4;
+	vars->movey = vars->size / 5;
 	vars->l = vars->tab;
 	vars->s = vars->l->s;
 	m = malloc(sizeof(t_map));

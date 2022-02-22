@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 14:16:22 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/21 12:17:45 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/22 18:52:32 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <errno.h>
 # include "mlx.h"
 # include "libft.h"
 # include <math.h>

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 13:48:32 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/21 01:20:00 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/22 18:36:34 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static char	*ft_read(int fd, char *s, t_vars *v)
 	int		i;
 
 	i = 1;
-	s_read = malloc(sizeof(char) * (100 + 1));
+	s_read = malloc(sizeof(char) * (10000 + 1));
 	if (!s_read)
 		return (v->err = 2, NULL);
 	s = ft_shorten(s, s_read, 2, v);
@@ -78,7 +78,7 @@ static char	*ft_read(int fd, char *s, t_vars *v)
 		return (free(s_read), NULL);
 	while (i > 0 && ft_strchr(s, '\n'))
 	{
-		i = read(fd, s_read, 100);
+		i = read(fd, s_read, 10000);
 		if (i < 0)
 			return (ft_shorten(s, s_read, 1, v));
 		s_read[i] = '\0';

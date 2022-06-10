@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 19:31:39 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/21 12:27:01 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/26 06:33:08 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	img_put_pixel(int x, int y, t_vars *v)
 	if (x > 0 && y > 0 && x < v->size && y < v->size)
 	{
 		adrtmp += (y * lsz + (x * ((bitsz) / 8)));
-		*(unsigned int *)adrtmp = (unsigned int)v->stdc;
+		*(unsigned int *)adrtmp = (unsigned int)v->cc;
 	}
 	return (0);
 }
@@ -60,6 +60,7 @@ static void	ft_bsh(t_vars *v, t_map *m0, t_map *m1)
 	ft_init_bsh(v, m0, m1);
 	x = m0->rx;
 	y = m0->ry;
+	v->cc = v->stdc + (m1->z * 100);
 	while (1)
 	{
 		img_put_pixel(x, y, v);
@@ -109,7 +110,7 @@ static int	ft_draw2d(t_vars *v)
 int	ft_draw(t_vars *v)
 {
 	ft_2d(v, 0, 0, 0);
-	v->img = mlx_new_image(v->mlx, 800, 800);
+	v->img = mlx_new_image(v->mlx, 1000, 1000);
 	if (!v->img)
 		return (fput("ERR IMG\n"), ft_destroy(v), 0);
 	v->adr = mlx_get_data_addr(v->img, &v->bitsz, &v->lsz, &v->endi);

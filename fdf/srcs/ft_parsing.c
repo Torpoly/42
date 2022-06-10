@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 10:18:27 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/21 12:27:24 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/26 06:31:14 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	ft_parsing(int ac, char **av, t_vars *vars)
 	vars->err = 0;
 	vars->winx = 0;
 	vars->winy = 0;
-	vars->size = 800;
+	vars->size = 1000;
 	if (ac != 2)
 		return (fput("ERROR WRONG ARGUMENTS\n"));
 	if (ft_strlen(av[1]) == 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 14:24:07 by rpol              #+#    #+#             */
-/*   Updated: 2022/02/19 02:58:46 by rpol             ###   ########.fr       */
+/*   Updated: 2022/02/22 18:42:42 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	keypress(int keycode, t_vars *vars)
 	if (keycode == 0x0078)
 		return (vars->zoom -= 1, ft_draw(vars));
 	if (keycode == 0x0063)
-		return (vars->stdc += 42, ft_draw(vars));
+		return (vars->stdc += 420, ft_draw(vars));
 	if (keycode == 0xff1b)
 		return (ft_destroy(vars), 0);
 	return (0);

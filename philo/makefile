@@ -6,7 +6,7 @@
 #    By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/03 14:17:45 by rpol              #+#    #+#              #
-#    Updated: 2022/02/21 14:10:19 by rpol             ###   ########.fr        #
+#    Updated: 2022/06/13 15:00:31 by rpol             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror 
 
 NAME = philo
-SRCS_NAME = philo.c
+SRCS_NAME = philo.c parsing.c
 SRCS_PATH = srcs
 SRCS = $(addprefix $(SRCS_PATH)/, $(SRCS_NAME))
 INCS_NAME = philo.h

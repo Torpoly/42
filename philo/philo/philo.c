@@ -6,7 +6,7 @@
 /*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:04:43 by rpol              #+#    #+#             */
-/*   Updated: 2022/06/18 22:52:42 by rpol             ###   ########.fr       */
+/*   Updated: 2022/06/19 16:09:02 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,23 +59,19 @@ int	message(t_philo *philo, int status)
 	int	t;
 
 	t = rtime(philo->global->strt);
-	pthread_mutex_lock(&philo->global->m_write);
-	pthread_mutex_lock(&philo->global->m_dead);
-	if (philo->global->dead == 1)
-	{
-		pthread_mutex_unlock(&philo->global->m_dead);
-		pthread_mutex_unlock(&philo->global->m_write);
+	if (status == EAT)
+		philo->last_meal = t;
+	if (dead(philo))
 		return (1);
-	}
+	pthread_mutex_lock(&philo->global->m_write);
 	if (status == THINK)
 		printf("%d %d is thinking\n", t, philo->id);
 	else if (status == FORK)
 		printf("%d %d has taken a fork\n", t, philo->id);
 	else if (status == EAT)
-		printf("%d %d is eating\n", philo->last_meal, philo->id);
+		printf("%d %d is eating\n", t, philo->id);
 	else if (status == SLEEP)
 		printf("%d %d is sleeping\n", t, philo->id);
-	pthread_mutex_unlock(&philo->global->m_dead);
 	pthread_mutex_unlock(&philo->global->m_write);
 	return (0);
 }
@@ -86,6 +82,6 @@ int	rtime(int strt)
 	int				t;
 
 	gettimeofday(&tv, NULL);
-	t = ((tv.tv_usec) / 1000);
+	t = ((((tv.tv_sec * 1000) + (tv.tv_usec) / 1000)) / 2);
 	return ((t - strt));
 }

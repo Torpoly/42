@@ -6,11 +6,12 @@
 /*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:54:48 by rpol              #+#    #+#             */
-/*   Updated: 2022/06/18 23:36:29 by rpol             ###   ########.fr       */
+/*   Updated: 2022/06/19 16:25:50 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#include <pthread.h>
 
 int	ft_startt(t_global *global, int i)
 {
@@ -49,7 +50,7 @@ int	dead(t_philo *philo)
 		pthread_mutex_unlock(&philo->global->m_dead);
 		return (1);
 	}
-	else if ((t - philo->last_meal) > philo->global->tt_die)
+	else if ((t - philo->last_meal) > (philo->global->tt_die))
 	{
 		pthread_mutex_lock(&philo->global->m_write);
 		philo->global->dead = 1;
@@ -62,17 +63,30 @@ int	dead(t_philo *philo)
 	return (0);
 }
 
-int	ft_wait(t_philo *philo, int wait)
+int	ft_wait(t_philo *philo, int wait, int status)
 {
 	int	startt;
-	int	strt;
 
-	strt = philo->global->strt;
-	startt = rtime(strt);
-	while ((rtime(strt) - startt) < wait)
+	startt = rtime(philo->global->strt);
+	if (status == EAT)
+	{
+		if (message(philo, EAT))
+			return (1);
+	}
+	while ((rtime(philo->global->strt) - startt) < wait)
 	{
 		usleep(100);
 		if (dead(philo))
+			return (1);
+	}
+	if (status == EAT)
+	{
+		if (freeforks(philo))
+			return (1);
+	}
+	else
+	{
+		if (message(philo, THINK))
 			return (1);
 	}
 	return (0);
@@ -80,7 +94,7 @@ int	ft_wait(t_philo *philo, int wait)
 
 int	takefork(t_philo *philo, int i)
 {
-	if (i == 0)
+	if ((i == 0 && (philo->id % 2) == 0) || (i == 1 && (philo->id % 2) != 0))
 	{
 		pthread_mutex_lock(&philo->lfork->m_fork);
 		if (philo->lfork->fork == 1)
@@ -91,7 +105,7 @@ int	takefork(t_philo *philo, int i)
 		}
 		pthread_mutex_unlock(&philo->lfork->m_fork);
 	}
-	else if (i == 1)
+	if ((i == 1 && (philo->id % 2) == 0) || (i == 0 && (philo->id % 2) != 0))
 	{
 		pthread_mutex_lock(&philo->rfork->m_fork);
 		if (philo->rfork->fork == 1)
@@ -114,22 +128,15 @@ void	*routine(void *p)
 	while (1)
 	{
 		i = 0;
-		if (message(philo, THINK))
-			return (NULL);
 		while (i < 2)
 		{	
 			i += takefork(philo, i);
 			if (dead(philo))
 				return (NULL);
 		}
-		philo->last_meal = rtime(philo->global->strt);
-		if (message(philo, EAT))
+		if (ft_wait(philo, philo->global->tt_eat, EAT))
 			return (NULL);
-		if (ft_wait(philo, philo->global->tt_eat))
-			return (NULL);
-		if (freeforks(philo))
-			return (NULL);
-		if (ft_wait(philo, philo->global->tt_sleep))
+		if (ft_wait(philo, philo->global->tt_sleep, SLEEP))
 			return (NULL);
 	}
 }

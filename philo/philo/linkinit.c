@@ -6,7 +6,7 @@
 /*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 01:03:17 by rpol              #+#    #+#             */
-/*   Updated: 2022/06/18 23:04:34 by rpol             ###   ########.fr       */
+/*   Updated: 2022/06/19 15:48:18 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ int	freeforks(t_philo *philo)
 	pthread_mutex_unlock(&philo->rfork->m_fork);
 	philo->nb_meals++;
 	if (philo->nb_meals == philo->global->nbt_eat)
+		return (1);
+	if (message(philo, SLEEP))
 		return (1);
 	return (0);
 }

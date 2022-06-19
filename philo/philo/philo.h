@@ -6,7 +6,7 @@
 /*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:03:52 by rpol              #+#    #+#             */
-/*   Updated: 2022/06/18 23:12:28 by rpol             ###   ########.fr       */
+/*   Updated: 2022/06/19 15:48:19 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int			ft_startt(t_global *global, int i);
 
 int			dead(t_philo *philo);
 
-int			ft_wait(t_philo *philo, int wait);
+int			ft_wait(t_philo *philo, int wait, int status);
 
 int			takefork(t_philo *philo, int i);
 

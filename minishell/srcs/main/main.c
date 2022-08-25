@@ -13,31 +13,29 @@ void	print_lexer(t_lexer *s)
 	while (s != NULL)
 	{
 		//printf("num %d  =",	s->koi);
-		printf("%s ........ ", token[s->koi]);
+		printf("%s ... ", token[s->koi]);
+		if(s->koi == 0)
+			printf(" : %s ... ", s->str);
 		s = s->next;
 		i++;
 	}
 	printf("\n");
 }
 
-
-
 void	minishell(t_shell *s)
 {
-	t_lexer	*lex;
-
-	lex = malloc(sizeof(t_lexer));
-	lex->prev = NULL;
-	lex->next = NULL;
+	
 	while (1)
 	{
 		s->lexer = NULL;
 		prompt(s);
 		lexer(s);
 		print_lexer(s->lexer);
-		printf("%s\n", s->prompt);
-		lex->str = s->prompt;
-		parsing(lex);
+		parsing(s->lexer);
+		printf("here\n");
+
+		//printf("%s\n", s->prompt);
+	//	print_lexer(s->lexer);
 	}
 }
 

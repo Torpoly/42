@@ -11,6 +11,14 @@ typedef enum e_koi{
 	LL_REDIR,
 }	t_koi;
 
+typedef enum e_quote{
+	S_QUOTES,
+	D_QUOTES,
+	DOLLAR,
+	MIX_QUOTES,
+	NOT_YET,
+}	t_quote;
+
 
 typedef struct s_lexer
 {
@@ -18,6 +26,7 @@ typedef struct s_lexer
 	struct s_lexer	*next;
 	char			*str;
 	t_koi			koi;
+	t_quote			quote;
 }	t_lexer;
 
 typedef struct t_ListElement
@@ -33,7 +42,8 @@ typedef struct s_parsing
 	struct s_parsing	*next;
 	char				*com;
 	char				*arg;
-	int					fd_in;
+	char				**car;
+	int					*fd_in;
 	int					fd_out;
 }	t_parsing;
 

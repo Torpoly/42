@@ -24,19 +24,19 @@ t_parsing	*parsing(t_lexer *lex)
 	return (par);
 }
 
-t_parsing	*redir(t_parsing *par, t_lexer *lex, int i, char *s)
+t_parsing	*redir(t_parsing *par, t_lexer *lex)
 {
 	if (par->fd_out != 1)
-		printf("closed fd :%d\n", par->fd_out);
+		printf("closed fd :%d__%d\n", par->fd_out, close(par->fd_out));
 	if (lex->prev->koi == R_REDIR)
-		par->fd_out = printf("fd out R :%d name %s\n", lex->prev->koi, lex->str);
-	else if (lex->prev->koi == RR_REDIR)
-		par->fd_out = printf("fd out RR:%d name %s\n", lex->prev->koi, lex->str);
-	if (ft_csch(lex->str, ' '))
 	{
-		while (s[i] != ' ')
-			i++;
-		par->arg = ft_strjoin(par->arg, s + i);
+		par->fd_out = open(lex->str, O_CREAT | O_TRUNC | O_WRONLY, 00644);
+		printf("fd out R name %s code %d\n", lex->str, par->fd_out);
+	}
+	else if (lex->prev->koi == RR_REDIR)
+	{
+		par->fd_out = open(lex->str, O_CREAT | O_APPEND | O_WRONLY, 00644);
+		printf("fd out RR name %s code %d\n", lex->str, par->fd_out);
 	}
 	return (par);
 }

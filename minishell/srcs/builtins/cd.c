@@ -1,4 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/03 13:39:22 by rpol              #+#    #+#             */
+/*   Updated: 2022/10/03 13:43:27 by rpol             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
+
+int	ft_strcmp_2(const char *str1, const char *str2)
+{
+	int	i;
+
+	i = 0;
+	if (!str1)
+		return (1);
+	while (str1[i] && str2[i])
+	{
+		if (str1[i] != str2[i])
+			return (1);
+		i++;
+	}
+	if (i < ft_strlen(str1) || i < ft_strlen(str2))
+		return (1);
+	return (0);
+}
 
 char	*search_in_env(t_List st, char *str)
 {
@@ -17,11 +47,17 @@ char	*search_in_env(t_List st, char *str)
 void	change_pwd(t_List st, char *old)
 {
 	char	*cwd;
+	char	*tmp;
 
+	(void) st;
 	cwd = NULL;
 	cwd = getcwd(cwd, 999999);
-	is_var(ft_strjoin("OLDPWD=", old), st);
-	is_var(ft_strjoin("PWD=", cwd), st);
+	tmp = ft_strjoin("OLDPWD=", old);
+	is_var(tmp, st);
+	free(tmp);
+	tmp = ft_strjoin("PWD=", cwd);
+	is_var(tmp, st);
+	free(tmp);
 	free(cwd);
 }
 
@@ -34,19 +70,14 @@ void	home(t_List st, char *buf)
 	{
 		chdir(home);
 		change_pwd(st, buf);
+		s()->sig->ret = 0;
 	}
 	else
+	{
 		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
+		s()->sig->ret = 1;
+	}
 	free(buf);
-}
-
-void	path_error( char *path, char *cwd)
-{
-	ft_putstr_fd("minishell: cd: ", 2);
-	ft_putstr_fd(path, 2);
-	ft_putstr_fd(": No such file or directory\n", 2);
-	free(cwd);
-	s()->sig->ret = 127;
 }
 
 void	cd(t_List st, char *path)
@@ -55,13 +86,18 @@ void	cd(t_List st, char *path)
 
 	cwd = NULL;
 	cwd = getcwd(cwd, 999999);
+	if (!cwd)
+		return (path_error(path, cwd));
 	if (path == NULL)
 		return (home(st, cwd));
 	else if (chdir(path))
+	{
 		return (path_error(path, cwd));
+	}
 	else
 	{
 		change_pwd(st, cwd);
 		free(cwd);
+		s()->sig->ret = 0;
 	}
 }

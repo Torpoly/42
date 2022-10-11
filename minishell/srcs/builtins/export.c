@@ -1,80 +1,92 @@
-#include "../includes/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/03 13:40:20 by rpol              #+#    #+#             */
+/*   Updated: 2022/10/09 11:43:54 by rpol             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int	is_in_env(t_List st, char *var_name, char *var_value)
-{
-	if (st == NULL)
-		return (0);
-	while (st != NULL)
-	{
-		if (!ft_strcmp_2(var_name, st->var))
-		{
-			st->var = var_name;
-			st->value = var_value;
-			return (1);
-		}
-		st = st->next;
-	}
-	return (0);
-}
+#include "../../includes/minishell.h"
 
-void	is_var(char *str, t_List st)
+static void	fonction_du_sale(int i, char *str, char **ret, t_List st)
 {
-	int		i;
-	char	**ret;
 	char	*var_name;
 	char	*var_value;
 
-	i = 0;
-	if (!ft_isalpha(str[i]))
-	{
-		ft_putstr_fd("minishell: export: : not a valid identifier\n", 2);
-		return ;
-	}
 	while (str[i] && (ft_isalnum(str[i]) || (str[i] == '_')))
-		i++;
+			i++;
 	if (str[i] && str[i] == '=')
 	{
-		ret = ft_trim_equal(str, '=');
+		ret = ft_trim_equal2(str, '=', 1, ret);
 		if (ret[0] == NULL)
 		{
-			ft_putstr_fd("bash: export: : not a valid identifier", 2);
-			return ;
+			write(2, "minishell: export: : not a valid identifier\n", 44);
+			s()->sig->ret = 1;
 		}
 		else
 			var_name = ret[0];
-		if (ret[1] == NULL)
+		i = 0;
+		if (!ret[1])
 			var_value = NULL;
 		else
 			var_value = ret[1];
-		free(ret);
 		if (!is_in_env(st, var_name, var_value))
 			push_list_back(&st, var_name, var_value);
 	}
 }
 
-void	export_only(t_List st)
+int	is_in_env(t_List st, char *var_name, char *var_value)
 {
-	int	i;
+	t_List	tmp;
+
+	tmp = st;
+	if (tmp == NULL)
+		return (0);
+	while (tmp != NULL)
+	{
+		if (!ft_strcmp_2(var_name, tmp->var))
+		{
+			free(var_name);
+			free(tmp->value);
+			tmp->value = var_value;
+			return (1);
+		}
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+void	is_var(char *str, t_List st)
+{	
+	int		i;
+	char	**ret;
 
 	i = 0;
-	if (st == NULL)
+	ret = malloc(sizeof(char *) * (2));
+	if (!ret)
 		return ;
-	while (st != NULL)
+	if (!ft_isalpha(str[i]) && str[i] != '_')
 	{
-		printf("%s=", st->var);
-		printf("%s\n", st->value);
-		st = st->next;
-		i++;
+		s()->sig->ret = 1;
+		write(2, "minishell: export: : Not a valid identifier\n", 44);
 	}
+	else
+		fonction_du_sale(i, str, ret, st);
+	free(ret);
 }
 
 void	ft_export(t_List st, char **arg)
 {
 	int	i;
 
-	i = 0;
-	if (arg[1] == NULL)
-		printf("le tri\n");
+	i = 1;
+	if (arg == NULL)
+		return ;
+	s()->sig->ret = 0;
 	while (arg[i])
 	{
 		is_var(arg[i], st);

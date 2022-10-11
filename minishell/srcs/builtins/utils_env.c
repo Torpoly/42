@@ -1,4 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_env.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/03 13:40:44 by rpol              #+#    #+#             */
+/*   Updated: 2022/10/03 13:43:46 by rpol             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
+
+static void	incr(int *i, int *r, char **ret, int n)
+{
+	if (n == 2)
+	{
+		*i += 1;
+		*r = 0;
+	}
+	if (n == 1)
+	{
+		ret[0] = NULL;
+		ret[1] = NULL;
+	}
+}
 
 int	is_equal(char c, char charset)
 {
@@ -7,7 +33,7 @@ int	is_equal(char c, char charset)
 	return (0);
 }
 
-static char	*ft_strcpy2(char const *s, int *i, int size)
+char	*ft_strcpy2(char const *s, int *i, int size)
 {
 	int		j;
 	char	*ret;
@@ -26,7 +52,7 @@ static char	*ft_strcpy2(char const *s, int *i, int size)
 	return (ret);
 }
 
-static char	**ft_free_equal(char **ret, int k)
+char	**ft_free_equal(char **ret, int k)
 {
 	while (k >= 0)
 	{
@@ -37,16 +63,15 @@ static char	**ft_free_equal(char **ret, int k)
 	return (NULL);
 }
 
-char	**ft_trim_equal(char const *s, char charset, int r, int k)
+char	**ft_trim_equal2(char const *s, char charset, int r, char **ret)
 {
-	char	**ret;
 	int		j;
 	int		i;
+	int		k;
 
 	i = 0;
-	ret = malloc(sizeof(char *) * (2));
-	if (!ret)
-		return (NULL);
+	k = -1;
+	incr(&i, &r, ret, 1);
 	while (s[i])
 	{
 		if (s[i] != charset)
@@ -54,6 +79,7 @@ char	**ft_trim_equal(char const *s, char charset, int r, int k)
 			j = i;
 			if (r == 0)
 				charset = 127;
+			r++;
 			while (s[j] != charset && s[j])
 				j++;
 			ret[++k] = ft_strcpy2(s, &i, j - i);
@@ -61,10 +87,7 @@ char	**ft_trim_equal(char const *s, char charset, int r, int k)
 				return (ft_free_equal(ret, k));
 		}
 		else
-		{
-			i++;
-			r = 0;
-		}
+			incr(&i, &r, ret, 2);
 	}
 	return (ret);
 }

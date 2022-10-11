@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_firstword.c                                     :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/03 13:48:20 by rpol              #+#    #+#             */
-/*   Updated: 2022/10/03 13:48:25 by rpol             ###   ########.fr       */
+/*   Created: 2022/10/03 13:48:51 by rpol              #+#    #+#             */
+/*   Updated: 2022/10/03 13:48:57 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_firstword(char	*s)
+char	*ft_strncpy(char *src, int size)
 {
-	char	**str;
+	int		i;
+	char	*dst;
 
-	str = ft_split(s, ' ');
-	return (str[0]);
+	i = 0;
+	dst = malloc(sizeof(char) * size);
+	while (i < size)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
 }

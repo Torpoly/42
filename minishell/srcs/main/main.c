@@ -1,59 +1,87 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hspriet <hspriet@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/03 13:42:07 by rpol              #+#    #+#             */
+/*   Updated: 2022/10/09 15:26:05 by hspriet          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
-
-void	print_lexer(t_lexer *s)
+static t_List	init(t_List st)
 {
-	int	i;
-	const char	*token[8] = {"ARG", "END", "PIPE","R_REDIR", "L_REDIR",
-		"RR_REDIR", "LL_REDIR",NULL};
+	char		*test[4];
+	char		cwd[1024];
 
-	i = 0;
-	if (s == NULL)
-		return ;
-	while (s != NULL)
-	{
-		//printf("num %d  =",	s->koi);
-		printf("%s ... ", token[s->koi]);
-		if(s->koi == 0)
-			printf(" : -%s- ... ", s->str);
-		s = s->next;
-		i++;
-	}
-	printf("\n");
+	s()->i = 1;
+	test[0] = "NULL";
+	test[1] = "258";
+	test[2] = "PATH=/bin";
+	test[3] = ft_strjoin("PWD=", getcwd(cwd, sizeof(cwd)));
+	test[4] = NULL;
+	return (add_list(test, st));
 }
 
-void	minishell(t_shell *s)
+void	freelex(t_lexer *l)
 {
-	
+	t_lexer	*tmp;
+
+	while (l->next)
+	{
+		tmp = l;
+		l = l->next;
+		if (tmp->koi == ARG)
+			free(tmp->str);
+		free(tmp);
+	}
+	free (l);
+}
+
+void	minishell(t_shell *shell, t_List st)
+{
 	while (1)
 	{
-		s->lexer = NULL;
-		prompt(s);
-		lexer(s);
-		trimer(s);
-		print_lexer(s->lexer);
-		parsing(s->lexer);
-		printf("here\n");
-		//printf("%s\n", s->prompt);
-		//lex->str = s->prompt;
-		//parsing(lex);
-		
-
-		//printf("%s\n", s->prompt);
-	//	print_lexer(s->lexer);
+		shell->error = 0;
+		shell->lexer = NULL;
+		shell->st = st;
+		prompt(shell);
+		lexer(shell);
+		trimer(shell, st);
+		if (parsing(shell))
+			free(shell->parsing);
+		if (shell->error || shell->lexer)
+			freelex(shell->lexer);
 	}
 }
 
 int	main(int ac, char **av, char **env)
 {
-	t_shell	*shell;
+	t_shell		*shell;
+	t_List		st;
 
+	if (isatty(1) == 0 || isatty(0) == 0)
+		return (0);
 	(void) ac;
 	(void) av;
+	st = NULL;
 	shell = s();
 	if (!shell)
 		return (0);
-	if (!add_list(env, shell->env))
-		return (0);
-	minishell(shell);
+	s()->i = 0;
+	signal_gestion(shell);
+	if (!env || !(*env))
+		st = init(st);
+	else
+	{
+		push_list_back(&st, "258", " ");
+		st = add_list(env, st);
+	}
+	shell->str_env = env;
+	shell->error = 0;
+	minishell(shell, st);
+	return (0);
 }

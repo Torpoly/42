@@ -1,18 +1,84 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/03 13:39:38 by rpol              #+#    #+#             */
+/*   Updated: 2022/10/09 15:45:33 by rpol             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
-
-int	ft_strcmp(char *s1, char *s2)
+char	**ft_free(char	**ret)
 {
-	int	i;
+	int	k;
 
-	i = 0;
-	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
+	k = 0;
+	while (ret[k])
+		k++;
+	while (k >= 0)
 	{
-		i++;
-		if (i == 2)
-			return (s1[i - 1] - s2[i - 1]);
+		free(ret[k]);
+		k--;
 	}
-	return (s1[i] - s2[i]);
+	free(ret);
+	return (NULL);
+}
+
+void	freeenv(t_List l)
+{
+	t_List	tmp;
+	int		i;
+
+	if (s()->i)
+		return ;
+	i = 0;
+	while (l->next)
+	{	
+		tmp = l;
+			l = l->next;
+		if (i != 0)
+		{
+			free(tmp->var);
+			free(tmp->value);
+		}
+		free(tmp);
+		i++;
+	}
+	free(l->var);
+	free(l->value);
+	free(l);
+}
+
+void	free_stuff(t_parsing *p, int n)
+{
+	t_shell	*sh;
+
+	sh = s();
+	if (p)
+	{		
+		ft_free(p->arg);
+		p->com = NULL;
+		p->arg = NULL;
+	}
+	if (n)
+	{
+		if (p)
+		{
+			close(p->std_in);
+			close(p->std_out);
+			free(p);
+		}
+		if (sh->lexer)
+			freelex(sh->lexer);
+		freeenv(sh->st);
+		free(s()->sig);
+		free(s());
+		clear_history();
+	}
 }
 
 int	is_n(char *str)
@@ -43,18 +109,18 @@ int	is_n(char *str)
 	return (1);
 }
 
-int	echo(char **str)
+void	echo(t_shell *shell, int i, int n)
 {
-	int	i;
-	int	n;
+	char	**str;
 
-	i = 0;
-	n = 1;
-	i = 1;
+	str = shell->parsing->arg;
 	if (str[i])
 	{
-		while (is_n(str[i++]))
+		while (is_n(str[i]))
+		{
 			n = 0;
+			i++;
+		}
 		if (str[i])
 		{
 			while (str[i])
@@ -68,5 +134,5 @@ int	echo(char **str)
 	}
 	if (n == 1)
 		ft_putstr_fd("\n", 1);
-	return (0);
+	s()->sig->ret = 0;
 }

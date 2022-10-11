@@ -1,47 +1,102 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/03 13:36:14 by rpol              #+#    #+#             */
+/*   Updated: 2022/10/09 15:38:28 by rpol             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
-int	ft_csch(char *s, char c)
+int	herenext(t_shell *sh)
 {
-	int	i;
+	t_lexer	*l;
 
-	i = 0;
-	while (s[i])
+	l = sh->parsing->l;
+	if (l->koi == ARG)
 	{
-		if (s[i] == c)
-			return (1);
-		i++;
+		while (l->koi != PIPE && l->koi != END)
+		{
+			if (l->koi == LL_REDIR)
+			{
+				sh->tmp = sh->parsing->l->str;
+				return (0);
+			}
+			l = l->next;
+		}
 	}
-	return (0);
+	return (1);
 }
 
-t_parsing	*parsing(t_lexer *lex)
+int	error(t_shell *sh, int i)
+{
+	sh->error = 1;
+	s()->sig->ret = 1;
+	if (i == 1)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd("MALLOC ERROR\n", 2);
+		ft_exit(0, NULL, 0);
+	}
+	else if (herenext(sh))
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(sh->parsing->l->str, 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
+		if (i == 3)
+			exit(130);
+	}
+	return (-1);
+}
+
+int	count_pipe(t_lexer *lex)
+{
+	t_lexer	*l;
+	int		i;
+
+	l = lex;
+	i = 0;
+	while (l->koi != END)
+	{
+		if (l->koi == PIPE)
+			i++;
+		l = l->next;
+	}
+	if (i)
+		return (i + 1);
+	return (i);
+}
+
+int	init_par(t_shell *sh)
 {
 	t_parsing	*par;
 
-	if (!lex || !lex->str)
-		return (NULL);
-	par = init_par(lex);
-	return (par);
+	par = malloc(sizeof(t_parsing));
+	if (!par)
+		return (error(sh, 1));
+	sh->parsing = par;
+	par->sh = sh;
+	par->arg = NULL;
+	par->com = NULL;
+	par->l = sh->lexer;
+	par->prev_in = STDIN_FILENO;
+	par->fd = 0;
+	par->nb_pipe = count_pipe(sh->lexer);
+	if (lex_check(sh))
+		return (0);
+	make_block(sh, sh->parsing);
+	return (0);
 }
 
-t_parsing	*redir(t_parsing *par, t_lexer *lex)
+int	parsing(t_shell *sh)
 {
-	if (par->fd_out != 1)
-		printf("closed fd :%d__%d\n", par->fd_out, close(par->fd_out));
-	if (lex->prev->koi == R_REDIR)
-	{
-		par->fd_out = open(lex->str, O_CREAT | O_TRUNC | O_WRONLY, 00644);
-		printf("fd out R name %s code %d\n", lex->str, par->fd_out);
-	}
-	else if (lex->prev->koi == RR_REDIR)
-	{
-		par->fd_out = open(lex->str, O_CREAT | O_APPEND | O_WRONLY, 00644);
-		printf("fd out RR name %s code %d\n", lex->str, par->fd_out);
-	}
-	return (par);
+	if (!sh->lexer || sh->error == 1 || sh->lexer->koi == END)
+		return (0);
+	if (!sh->error)
+		init_par(sh);
+	return (1);
 }
-
-// t_parsing	*pipe(t_parsing *par)
-// {
-
-// }

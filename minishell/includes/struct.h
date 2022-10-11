@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   struct.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/03 13:37:28 by rpol              #+#    #+#             */
+/*   Updated: 2022/10/09 14:39:02 by rpol             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCT_H
 # define STRUCT_H
 
@@ -19,7 +31,6 @@ typedef enum e_quote{
 	NOT_YET,
 }	t_quote;
 
-
 typedef struct s_lexer
 {
 	struct s_lexer	*prev;
@@ -38,13 +49,18 @@ typedef struct t_ListElement
 
 typedef struct s_parsing
 {
-	struct s_parsing	*prev;
-	struct s_parsing	*next;
 	char				*com;
-	char				*arg;
-	char				**car;
-	int					*fd_in;
-	int					fd_out;
+	char				**arg;
+	int					std_in;
+	int					std_out;
+	int					prev_in;
+	int					pipe[2];
+	int					nb_pipe;
+	int					status;
+	int					fd;
+	char				*error;
+	struct s_shell		*sh;
+	t_lexer				*l;
 }	t_parsing;
 
 typedef struct s_sig
@@ -52,17 +68,24 @@ typedef struct s_sig
 	int				ret;
 	int				sigint;
 	int				sigquit;
-	pid_t			pid;
 }		t_sig;
 
 typedef struct s_shell
 {
 	t_ListElement	*env;
+	char			**str_env;
 	t_lexer			*lexer;
+	t_parsing		*parsing;
 	t_sig			*sig;
 	int				error;
 	char			*prompt;
-
+	int				pid;
+	t_List			st;
+	char			*tmp;
+	int				t;
+	int				i;
+	int				b;
+	int				fin;
 }	t_shell;
 
 #endif

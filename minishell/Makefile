@@ -15,12 +15,25 @@ SRCS =	srcs/prompt/prompt.c \
 		srcs/singletons/sing.c \
 		srcs/lexer/lexer.c \
 		srcs/lexer/lexer_utils1.c \
+		srcs/lexer/lexer_utils2.c \
 		srcs/utils/lexer_list.c \
 		srcs/lexer/lexer_tester.c \
 		srcs/parsing/parsing.c \
 		srcs/parsing/utils_parsing.c \
+		srcs/parsing/redir.c \
+		srcs/parsing/ici_fichier.c \
 		srcs/lexer/lexer_quotes.c \
-		srcs/trimtrim/trimer.c 
+		srcs/trimtrim/trimer.c 	\
+		srcs/trimtrim/trimer_utils.c 	\
+		srcs/builtins/echo.c \
+		srcs/exec/exec_builtins.c \
+		srcs/builtins/pwd.c \
+		srcs/builtins/cd.c \
+		srcs/builtins/export.c \
+		srcs/builtins/unset.c \
+		srcs/errors/errors.c \
+		srcs/builtins/exit.c \
+		srcs/signals/signal.c \
 
 OBJS = ${SRCS:.c=.o}
 

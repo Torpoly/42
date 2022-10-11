@@ -1,70 +1,99 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   trimer.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/03 13:45:34 by rpol              #+#    #+#             */
+/*   Updated: 2022/10/03 13:45:36 by rpol             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
-int is_quote(char c)
+int	is_quote(char c)
 {
 	if (c == '\'')
 		return (1);
 	if (c == '\"')
 		return (1);
 	return (0);
-	
 }
 
-
-void	supp_d_quote(t_shell *s, t_lexer *l, t_quote quote, int *i)
+char	*is_in_env2(t_List st, char *var_name)
 {
-	int	fin;
-	char *start;
-	char *finish;
+	char	*ret;
+	t_List	tmp;
 
-	(void) s;
-	(void) quote;
-	fin = (*i) + 1;
-	while (l->str[fin] && l->str[fin] != (char) quote)
+	tmp = st;
+	if (tmp == NULL)
+		return (0);
+	while (tmp != NULL)
 	{
-		fin++;
+		if (!ft_strcmp_2(var_name, tmp->var))
+		{
+			ret = tmp->value;
+			return (ret);
+		}
+		tmp = tmp->next;
 	}
-	if (l->str == 0)
-			fin--;
-	start = ft_strjoin(ft_strldup(l->str, (*i)), ft_strldup(l->str + (*i) + 1 , fin - (*i) - 1));
-	finish = ft_strjoin(start, ft_strdup(l->str + fin + 1));
+	return (NULL);
+}
+
+void	not_expand(t_lexer *l, char *finish, char *start, char *ret)
+{
+	char		*tmp1;
+	char		*tmp2;
+	char		*tmp3;
+
+	tmp2 = ft_strdup(l->str + s()->fin);
+	tmp1 = ft_strjoin(ret, tmp2);
+	finish = ft_strjoin(start, tmp1);
+	free(l->str);
 	l->str = finish;
 	free(start);
-	(*i) = fin - 1;
+	free(tmp1);
+	free(tmp2);
+	tmp3 = ft_itoa(s()->sig->ret);
+	if (ft_strcmp_2(ret, tmp3))
+		s()->b = 1;
+	else
+		s()->b = 0;
+	free(tmp3);
 }
 
-void	trimer_large(t_shell *s, t_lexer *l)
+void	ft_24line(char *ret)
 {
-	int	i;
-
-	i = 0;
-	while (l->str[i])
-	{
-		if (l->str[i] == '\'')
-		{
-			supp_d_quote(s, l, S_QUOTES, &i);
-		}
-		else if (l->str[i] =='\"')
-		{
-			supp_d_quote(s, l, D_QUOTES, &i);
-		}
-		else 
-			i++;
-	}
+	if (s()->b == 0)
+		free(ret);
 }
 
-void	trimer(t_shell *s)
+void	supp_dollarz(t_lexer *l, int *i, t_List st)
 {
-	t_lexer	*lexer;
+	char	*ret;
+	char	*start;
+	char	*finish;
+	char	*var;
 
-	lexer = s->lexer;
-	if (lexer == NULL)
-		return ;
-	while (lexer)
+	s()->fin = (*i) + 1;
+	start = ft_strldup(l->str, (*i));
+	finish = NULL;
+	if (l->str[s()->fin] == '?' && s()->fin++)
+		ret = ft_itoa(s()->sig->ret);
+	else
 	{
-		if (lexer->koi == ARG)
-			trimer_large(s, lexer);
-		lexer = lexer->next;
+		while ((ft_isalnum(l->str[s()->fin]) || (l->str[s()->fin] == '_'))
+			&& l->str[s()->fin])
+			s()->fin++;
+		var = ft_strldup(l->str + (*i) + 1,
+				s()->fin - (*i) - 1);
+		ret = is_in_env2(st, var);
+		if (ret == NULL)
+			return (free(var), not_expand(l, finish, start, ""));
+		free(var);
 	}
-	
+	not_expand(l, finish, start, ret);
+	(*i) += ft_strlen(ret);
+	ft_24line(ret);
 }

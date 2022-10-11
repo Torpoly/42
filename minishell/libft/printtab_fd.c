@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_firstword.c                                     :+:      :+:    :+:   */
+/*   printtab_fd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/03 13:48:20 by rpol              #+#    #+#             */
-/*   Updated: 2022/10/03 13:48:25 by rpol             ###   ########.fr       */
+/*   Created: 2022/10/03 13:46:40 by rpol              #+#    #+#             */
+/*   Updated: 2022/10/03 13:46:42 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_firstword(char	*s)
+void	printtab_fd(char **t, int fd)
 {
-	char	**str;
+	int	i;
 
-	str = ft_split(s, ' ');
-	return (str[0]);
+	i = 0;
+	while (t[i])
+	{
+		ft_putstr_fd(t[i], fd);
+		write(fd, "\n", 1);
+		i++;
+	}
 }

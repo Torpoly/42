@@ -8,7 +8,7 @@ Before you start, read the mans for all builtins and remember what is not asked 
 
 If you have never implememted pipex do it, it will save you so much time and sweat.
 
-Regarding the above mentioned tip, I chose not to do it, don't do like I did!
+Regarding the above mentioned tip, I chose not to do it, don't do like me, its stupid!
 
 Remember to always check if things exist before you free them and that should be the case especially if you run it with env -i
 

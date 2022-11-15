@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 13:42:20 by rpol              #+#    #+#             */
-/*   Updated: 2022/10/08 15:03:30 by rpol             ###   ########.fr       */
+/*   Updated: 2022/11/15 16:52:59 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static	void	ec145(t_parsing *p)
 	int		i;
 
 	i = 1;
-	p->fd = open("/tmp/.ici", O_WRONLY | O_CREAT | O_TRUNC, 00644);
+	p->fd = open(".ici", O_WRONLY | O_CREAT | O_TRUNC, 00644);
 	if (p->fd == -1)
 		error(p->sh, 3);
 	s()->t = 1;
@@ -67,10 +67,10 @@ void	ici_fichier(t_parsing *p)
 	waitpid(pid, &p->status, 0);
 	error_return(p, 2);
 	s()->t = 0;
-	p->fd = open("/tmp/.ici", O_RDONLY);
+	p->fd = open(".ici", O_RDONLY);
 	if (p->fd == -1)
 	{
-		unlink("/tmp/.ici");
+		unlink(".ici");
 		ft_putstr_fd("heredoc cant be opened\n", 2);
 	}
 	else

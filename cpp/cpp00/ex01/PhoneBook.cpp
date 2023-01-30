@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
+/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/30 19:50:19 by rpol              #+#    #+#             */
-/*   Updated: 2023/01/30 20:06:07 by rpol             ###   ########.fr       */
+/*   Created: 2023/01/30 20:12:38 by rpol              #+#    #+#             */
+/*   Updated: 2023/01/30 20:16:28 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_HPP
-# define PHONEBOOK_HPP
+#include <iostream>
+#include "PhoneBook.hpp"
 
-class PhoneBook {
-
-public:
+PhoneBook::PhoneBook( void ) {
 	
-	PhoneBook( void );
-	~PhoneBook( void );
+	std::cout << "constructor called" << std::endl;
+	
+	return;
+	
+}
+PhoneBook::~PhoneBook( void ) {
 
-};
-
-#endif
+	std::cout << "destructor called" << std::endl;
+	
+	return;
+	
+}

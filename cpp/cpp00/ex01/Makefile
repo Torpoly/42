@@ -4,7 +4,8 @@ FLAGS = -Wall -Wextra -Werror -std=c++98
 
 NAME = MyAwsomePhoneBook
 
-SRCS =	MyAwsomePhoneBook.cpp
+SRCS =	PhoneBook.cpp \
+		main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 

@@ -5,7 +5,8 @@ FLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = MyAwsomePhoneBook
 
 SRCS =	PhoneBook.cpp \
-		main.cpp
+		Contact.cpp \
+		main.cpp 
 
 OBJS = $(SRCS:.cpp=.o)
 
@@ -24,4 +25,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all re clean fclean test
+.PHONY: all clean fclean re

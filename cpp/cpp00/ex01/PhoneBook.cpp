@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 20:12:38 by rpol              #+#    #+#             */
-/*   Updated: 2023/01/31 04:01:44 by rpol             ###   ########.fr       */
+/*   Updated: 2023/01/31 15:22:36 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void PhoneBook::search( void ) {
 	else
 	{
 		int index = 0;
+		std::cout << "     INDEX| FIST NAME| LAST NAME|  NICKNAME" <<std::endl;
 		while (index < 8)
 		{
 			if (this->Contact_Tab[index].is_contact_set()) 
@@ -111,7 +112,6 @@ void PhoneBook::search( void ) {
 		else
 			std::cout << "WRONG INDEX, GOING BACK TO MAIN MENU" << std::endl;
 		std::cin.clear();
-		
 	}
 	
 	return;

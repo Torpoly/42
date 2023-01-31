@@ -6,11 +6,12 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 02:13:01 by rpol              #+#    #+#             */
-/*   Updated: 2023/01/31 03:59:03 by rpol             ###   ########.fr       */
+/*   Updated: 2023/01/31 15:36:11 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <iomanip>
 #include "Contact.hpp"
 
 Contact::Contact( void ) {
@@ -33,26 +34,56 @@ bool Contact::is_contact_set( void ) const {
 	
 }
 
+
 void Contact::set_contact( int index ) {
 	
-	this->First_Name = "stuff";
-	this->Last_Name = "stuff";
-	this->Nickname = "stuff";
-	this->Telephone_Number = "stuff";
-	this->Darkest_Secret = "stuff";
+	std::cout<<"ENTER CONTACT FIRST NAME: ";
+	while (std::getline(std::cin, this->First_Name) && this->First_Name == "\0")
+		std::cout << "CAN'T HAVE EMPTY FIELD, PLEASE ENTER CONTACT FIRST NAME: ";
+
+	std::cout<<"ENTER CONTACT LAST NAME: ";
+	while (std::getline(std::cin, this->Last_Name) && this->Last_Name == "\0")
+		std::cout << "CAN'T HAVE EMPTY FIELD, PLEASE ENTER CONTACT LAST NAME: ";
+
+	std::cout<<"ENTER CONTACT NICKNAME: ";
+	while (std::getline(std::cin, this->Nickname) && this->Nickname == "\0")
+		std::cout << "CAN'T HAVE EMPTY FIELD, PLEASE ENTER CONTACT NICKNAME: ";
+
+	std::cout<<"ENTER CONTACT TELEPHONE NUMBER: ";
+	while (std::getline(std::cin, this->Telephone_Number) && this->Telephone_Number == "\0")
+		std::cout << "CAN'T HAVE EMPTY FIELD, PLEASE ENTER CONTACT TELEPHONE NUMBER: ";
+
+	std::cout<<"ENTER CONTACT DARKEST SECRET: ";
+	while (std::getline(std::cin, this->Darkest_Secret) && this->Darkest_Secret == "\0")
+		std::cout << "CAN'T HAVE EMPTY FIELD, PLEASE ENTER CONTACT DARKEST SECRET: ";
+	
 	this->is_set = true;
 	std::cout << "CONTACT INFO ADDED TO INDEX: " << index << " , GOING BACK TO MAIN MENU" << std::endl;
 }
 
+void Contact::cut_string_10( std::string string) const {
+
+	if (string.size() > 9)
+		std::cout << string.substr(0,9) << ".";
+	else
+		std::cout << std::setw(10) << string;
+}
+
 void Contact::print_contact_short( int index ) const {
 	
-	std::cout << index << " | ";
+	std::cout << std::setw(10) << index << "|";
 	
-	std::cout << this->First_Name << " | ";
+	this->cut_string_10( this->First_Name );
 	
-	std::cout << this->Last_Name << " | ";
+	std::cout << "|";
 	
-	std::cout << this->Nickname << std::endl;
+	this->cut_string_10( this->Last_Name );
+
+	std::cout << "|";
+
+	this->cut_string_10( this->Nickname );
+	
+	std::cout << std::endl;
 }
   
 void Contact::print_contact_full( void ) const {

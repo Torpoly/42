@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:50:57 by rpol              #+#    #+#             */
-/*   Updated: 2023/01/31 03:59:26 by rpol             ###   ########.fr       */
+/*   Updated: 2023/01/31 15:04:18 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ public:
 	void print_contact_full( void ) const;
 
 	void print_contact_short( int index ) const;
+
+	void cut_string_10( std::string string) const;
 
 	bool is_contact_set( void ) const;
 

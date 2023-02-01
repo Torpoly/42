@@ -1,19 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   newZombie.cpp                                      :+:      :+:    :+:   */
+/*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/01 22:39:01 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/01 23:29:43 by rpol             ###   ########.fr       */
+/*   Created: 2023/02/01 22:39:09 by rpol              #+#    #+#             */
+/*   Updated: 2023/02/02 00:22:39 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <iostream>
 #include "Zombie.hpp"
 
-Zombie *newZombie( std::string name ) {
+Zombie::Zombie( void ) {
 	
-	Zombie *newZombie = new Zombie(name);
-	return (newZombie);
+	return;
+}
+Zombie::~Zombie( void ) {
+	
+	std::cout << "Zombie: " << this->_name << " has died" << std::endl;
+	return;
+}
+		
+void Zombie::announce( void ){
+	
+	std::cout << this->_name << ": BraiiiiiiinnnzzzZ..." << std::endl;
+}
+
+void Zombie::name_zombie( std::string name ){
+	
+	this->_name = name;
+	std::cout << "Zombie: " << this->_name << " has been named" << std::endl;
 }

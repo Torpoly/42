@@ -2,12 +2,9 @@ COMPILER = c++
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-NAME = BraiiiiiiinnnzzzZ
+NAME = HI_THIS_IS_BRAIN
 
-SRCS =	Zombie.cpp \
-		newZombie.cpp \
-		randomChump.cpp \
-		main.cpp 
+SRCS =	main.cpp 
 
 OBJS = $(SRCS:.cpp=.o)
 

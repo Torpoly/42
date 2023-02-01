@@ -6,22 +6,25 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 22:38:56 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/01 23:30:11 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/02 00:46:35 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include <iostream>
 
 int	main(void) {
 	
-	Zombie Foo("Foo");
-	Foo.announce();
+	std::string string =  "HI THIS IS BRAIN";
+	std::string* stringPTR = &string;
+	std::string& stringREF = string;
 
-	Zombie *NewZombie = newZombie("NewZombie");
-	NewZombie->announce();
-	delete NewZombie;
+	std::cout << "The memory address of the string variable is: " << &string << std::endl;
+	std::cout << "The memory address held by stringPTR is: " << stringPTR << std::endl;
+	std::cout << "The memory address held by stringREF is: " << &stringREF << std::endl;
 
-	randomChump("randomChump");
+	std::cout << "The value of the string variable is: " << string << std::endl;
+	std::cout << "The value pointed to by stringPTR is: " << *stringPTR << std::endl;
+	std::cout << "The value pointed to by stringREF is: " << stringREF << std::endl;
 	
 	return (EXIT_SUCCESS);
 }

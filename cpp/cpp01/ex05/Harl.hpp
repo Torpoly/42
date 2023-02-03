@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 02:22:57 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/03 02:26:44 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/03 15:07:06 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,5 @@ class Harl{
 		
 		void error( void );
 };
-
-/*IN ZOMBIEHORDE.CPP*/
-
-Zombie*			zombieHorde( int N, std::string name );
 
 #endif

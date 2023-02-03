@@ -1,39 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/03 02:23:02 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/03 15:08:08 by rpol             ###   ########.fr       */
+/*   Created: 2023/02/03 02:22:57 by rpol              #+#    #+#             */
+/*   Updated: 2023/02/03 16:17:44 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef HARL_HPP
+# define HARL_HPP
+
 #include <iostream>
-#include "Harl.hpp"
+#include <string>
 
-int main( void ) {
+enum HARL_LEVEL {
+    DEBUG,
+    INFO,
+    WARNING,
+    ERROR
+};
 
-	Harl harl;
-
-	harl.complain("DEBUG");
+class Harl{
 	
-	std::cout << std::endl;
+	public:
+	
+		Harl( void );
+		~Harl( void );
+		
+		void	complain( std::string level );
 
-	harl.complain("INFO");
+	private:
+	
+		void debug( void );
+		
+		void info( void );
+		
+		void warning( void );
+		
+		void error( void );
+};
 
-	std::cout << std::endl;
-
-	harl.complain("WARNING");
-
-	std::cout << std::endl;
-
-	harl.complain("ERROR");
-
-	std::cout << std::endl;
-
-	harl.complain("UNKNOWNED");
-
-	return EXIT_SUCCESS;
-}
+#endif

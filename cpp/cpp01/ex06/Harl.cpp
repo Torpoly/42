@@ -6,7 +6,7 @@
 /*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 02:22:53 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/03 16:38:48 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/03 16:22:33 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,35 @@ Harl::~Harl( void ) {
 		
 void	Harl::complain( std::string level ) {
 	
-	void (Harl::*pointer_to_function[4])(void) = {
-		&Harl::debug,
-		&Harl::info,
-		&Harl::warning,
-		&Harl::error};
-	
 	std::string lvl[4] = {
 		"DEBUG",
 		"INFO",
 		"WARNING",
 		"ERROR"};
 	
-	int i = 0;
-	while (i < 4)
+	int HARL_LVL = DEBUG;
+	while (HARL_LVL <= ERROR)
 	{
-		if (lvl[i] == level)
-			return (this->*pointer_to_function[i])();
-		i++;
+		if (lvl[HARL_LVL] == level)
+			break;
+		HARL_LVL++;
 	}
 	
-	std::cout << "Harl doesn't have a " << level << " level of complaint!" << std::endl;
-
-	return;
+	switch (HARL_LVL) {
+	
+    	case DEBUG:
+      		this->debug();
+    	case INFO:
+      		this->info();
+   		case WARNING:
+      		this->warning();
+    	case ERROR:
+     		this->error();
+			break;
+  		default:
+      		std::cout << "Harl doesn't have a " << level << " level of complaint!" << std::endl;
+      	return;
+  	}
 }
 
 void Harl::debug( void ) {

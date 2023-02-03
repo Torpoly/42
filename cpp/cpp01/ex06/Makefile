@@ -2,7 +2,7 @@ COMPILER = c++
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-NAME = Harl
+NAME = HarlFilter
 
 SRCS =	main.cpp \
 		Harl.cpp

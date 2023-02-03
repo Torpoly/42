@@ -6,12 +6,12 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 22:39:13 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/01 23:54:14 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/03 20:19:30 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONTACT_HPP
-# define CONTACT_HPP
+#ifndef ZOMBIE_HPP
+# define ZOMBIE_HPP
 
 #include <iostream>
 #include <string>

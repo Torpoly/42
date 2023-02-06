@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 22:39:13 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/03 20:19:54 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/06 17:43:05 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define ZOMBIE_HPP
 
 #include <iostream>
+#include <cstdlib>
 
 class Zombie{
 	
@@ -29,14 +30,12 @@ class Zombie{
 		std::string _name;
 };
 
-/*IN NEWZOMBIE.CPP*/
+/*IN NEWZOMBIES.CPP*/
 
 Zombie			*newZombie( std::string name );
 
 /*IN RANDOMCHUMP.CPP*/
 
 void			randomChump( std::string name );
-
-
 
 #endif

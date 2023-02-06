@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 00:22:30 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/03 02:17:05 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/06 18:05:45 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
 #include <sys/stat.h>
 
 int is_a_directory( std::string file_name ) {
@@ -43,7 +44,7 @@ int	main( int ac, char **av)
 		return (std::cout << "Could not open" << av[1] << " ! (╯°□°)╯︵ ┻━┻" << std::endl, EXIT_FAILURE);
 	
 	newfile.append(".replace");
-	std::ofstream ofs_newfile(newfile);
+	std::ofstream ofs_newfile(newfile.c_str());
 	if (ofs_newfile.fail())
 	{
 		ifs_file.close();
@@ -64,14 +65,15 @@ int	main( int ac, char **av)
 	
 	if (search != replace)
 	{
-		int i;
+		unsigned long int i = 0;
 		while (1)
 		{
-			i = temp.find(search);
+			i = temp.find(search, i);
 			if (i >= std::string::npos)
 				break;
 			temp.erase(i, search.size());
 			temp.insert(i, replace);
+			i += replace.length();
 			buff = temp;
 		}
 	}

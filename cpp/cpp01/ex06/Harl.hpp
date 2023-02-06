@@ -6,7 +6,7 @@
 /*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 02:22:57 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/03 16:17:44 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/06 18:08:42 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <iostream>
 #include <string>
+#include <cstdlib>
 
 enum HARL_LEVEL {
     DEBUG,

@@ -1,6 +1,6 @@
-COMPILER = c++
+CXX = c++
 
-FLAGS = -Wall -Wextra -Werror -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 NAME = Moar_brainz
 
@@ -8,17 +8,24 @@ SRCS =	Zombie.cpp \
 		zombieHorde.cpp \
 		main.cpp 
 
-OBJS = $(SRCS:.cpp=.o)
+OBJ_DIR = obj
+
+OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o))
 
 RM = rm -f
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(COMPILER) $(FLAGS) $(OBJS) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
+
+$(OBJ_DIR)/%.o: %.cpp
+	mkdir -p $(OBJ_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
 	$(RM) $(OBJS)
+	rmdir $(OBJ_DIR) || true
 
 fclean: clean
 	$(RM) $(NAME)

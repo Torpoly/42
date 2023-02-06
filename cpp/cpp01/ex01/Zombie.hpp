@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 22:39:13 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/03 20:19:30 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/06 17:26:26 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define ZOMBIE_HPP
 
 #include <iostream>
-#include <string>
+#include <cstdlib>
 
 class Zombie{
 	

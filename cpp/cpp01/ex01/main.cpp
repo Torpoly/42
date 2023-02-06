@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 22:38:56 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/02 00:23:20 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/06 17:51:36 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(void) {
 	
-	int N = 21;
+	int N = 5;
 	int i = 0;
 
 	Zombie*		UnitedHordeOfZombies = zombieHorde( N, "hoarder_" );

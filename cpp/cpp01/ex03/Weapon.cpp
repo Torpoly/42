@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Weapon.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 22:09:04 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/02 22:48:01 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/06 18:20:23 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,8 @@ std::string 	Weapon::getType( void ) const {
 		
 void 			Weapon::setType( std::string type ) {
 	
-	this->_type = type;
+	if (type.empty())
+		this->_type = "A WEAPON THAT IS NAMED EMPTY STRING";
+	else
+		this->_type = type;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:15:20 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/06 18:27:39 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/06 22:55:41 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,11 @@ int				Fixed::toInt( void ) const {
 		
 int		Fixed::getRawBits( void ) const {
 	
-	std::cout << "getRawBits member function called" << std::endl;
 	return this->_fixed;
 }
 		
 void	Fixed::setRawBits( int const raw ) {
 	
-	std::cout << "setRawBits member function called" << std::endl;
 	this->_fixed = raw;
 }
 

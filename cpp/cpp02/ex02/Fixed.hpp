@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:15:25 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/06 18:26:32 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/06 22:46:44 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,43 @@ class Fixed{
 		
 		~Fixed( void );
 
-		Fixed & 		operator=( Fixed const & rhs );
+		Fixed & 				operator=( Fixed const & rhs );
+
+		bool 					operator>( Fixed const & rhs) const;
+
+		bool 					operator<( Fixed const & rhs) const;
+
+		bool 					operator>=( Fixed const & rhs) const;
+	
+		bool 					operator<=( Fixed const & rhs) const;
+
+		bool 					operator==( Fixed const & rhs) const;
+
+		bool 					operator!=( Fixed const & rhs) const;
+
+		Fixed 					operator+( Fixed const & rhs) const;
+
+		Fixed 					operator-( Fixed const & rhs) const;
+
+		Fixed 					operator*( Fixed const & rhs) const;
+
+		Fixed 					operator/( Fixed const & rhs) const;
+
+		Fixed 					operator++( int n );
+
+		Fixed 					operator--( int n );
+
+		Fixed 					operator++( void );
+
+		Fixed 					operator--( void );
+
+		static Fixed &			min(Fixed & src1, Fixed & src2);
+
+		static Fixed &			max(Fixed & src1, Fixed & src2);
+
+		static const Fixed &	min(Fixed const & src1, Fixed const & src2);
+
+		static const Fixed &	max(Fixed const & src1, Fixed const & src2);
 
 		float			toFloat( void ) const;
 

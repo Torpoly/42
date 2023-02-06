@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:15:20 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/05 20:56:26 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/06 22:49:57 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,37 +16,147 @@ int const Fixed::_bits = 8;
 
 Fixed::Fixed( void ) :_fixed(0) {
 	
-	std::cout << "Default constructor called" <<std::endl;
 }
 
 Fixed::Fixed( const Fixed & src ) {
 	
-	std::cout << "Copy constructor called" <<std::endl;
 	*this = src;
 }
 
 Fixed::Fixed( const float n ){
 	
-	std::cout << "Float constructor called" << std::endl;
-	this->_fixed = (int)std::roundf(n * (1 << this->_bits));
+	this->_fixed = (int)roundf(n * (1 << this->_bits));
 }
 
 Fixed::Fixed( const int n ){
 	
-	std::cout << "Int constructor called" << std::endl;
 	this->_fixed = (n * (1 << this->_bits));
 }
 		
 Fixed::~Fixed( void ) {
 
-	std::cout << "Destructor called" << std::endl;
 }
 
 Fixed& 	Fixed::operator=( const Fixed & rhs) {
 	
-	std::cout << "Copy assignment operator called" << std::endl;
 	this->_fixed = rhs.getRawBits();
 	return *this;
+}
+
+bool 					Fixed::operator>( Fixed const & rhs) const {
+	
+	if (this->getRawBits() > rhs.getRawBits())
+		return ( true );
+	else
+		return ( false );
+}
+
+bool 					Fixed::operator<( Fixed const & rhs) const {
+	
+	if (this->getRawBits() < rhs.getRawBits())
+		return ( true );
+	else
+		return ( false );
+}
+
+bool 					Fixed::operator>=( Fixed const & rhs) const {
+	
+	if (this->getRawBits() >= rhs.getRawBits())
+		return ( true );
+	else
+		return ( false );
+}
+
+bool 					Fixed::operator<=( Fixed const & rhs) const {
+	
+	if (this->getRawBits() <= rhs.getRawBits())
+		return ( true );
+	else
+		return ( false );
+}
+
+bool 					Fixed::operator==( Fixed const & rhs) const {
+	
+	if (this->getRawBits() == rhs.getRawBits())
+		return ( true );
+	else
+		return ( false );
+}
+
+bool 					Fixed::operator!=( Fixed const & rhs) const {
+	
+	if (this->getRawBits() != rhs.getRawBits())
+		return ( true );
+	else
+		return ( false );
+}
+
+Fixed 					Fixed::operator+( Fixed const & rhs) const {
+	
+	return ( this->toFloat() + rhs.toFloat() );
+}
+
+Fixed					Fixed::operator-( Fixed const & rhs) const {
+	
+	return ( this->toFloat() - rhs.toFloat() );
+}
+
+Fixed 					Fixed::operator*( Fixed const & rhs) const {
+	
+	return ( this->toFloat() * rhs.toFloat() );
+}
+
+Fixed 					Fixed::operator/( Fixed const & rhs) const {
+	
+	return ( this->toFloat() / rhs.toFloat() );
+}
+
+Fixed 					Fixed::operator++( int ) {
+	
+	Fixed a = *this;
+	
+	this->setRawBits(this->getRawBits() + 1);
+	return ( a );
+}
+
+Fixed 					Fixed::operator--( int ) {
+	
+	Fixed a = *this;
+	
+	this->setRawBits(this->getRawBits() - 1);
+	return ( a );
+}
+
+Fixed 					Fixed::operator++( void ) {
+	
+	this->setRawBits(this->getRawBits() + 1);
+	return ( *this );
+}
+
+Fixed 					Fixed::operator--( void ) {
+	
+	this->setRawBits(this->getRawBits() - 1);
+	return ( *this );
+}
+
+Fixed &			Fixed::min(Fixed & src1, Fixed & src2) {
+	
+	return ( (src1 < src2) ? src1 : src2 );
+}
+
+Fixed &			Fixed::max(Fixed & src1, Fixed & src2) {
+	
+	return ( (src1 > src2) ? src1 : src2 );
+}
+
+const Fixed &	Fixed::min(Fixed const & src1, Fixed const & src2) {
+	
+	return ( (src1 < src2) ? src1 : src2 );
+}
+
+const Fixed &	Fixed::max(Fixed const & src1, Fixed const & src2) {
+	
+	return ( (src1 > src2) ? src1 : src2 );
 }
 
 float			Fixed::toFloat( void ) const {
@@ -61,13 +171,11 @@ int				Fixed::toInt( void ) const {
 		
 int		Fixed::getRawBits( void ) const {
 	
-	std::cout << "getRawBits member function called" << std::endl;
 	return this->_fixed;
 }
 		
 void	Fixed::setRawBits( int const raw ) {
 	
-	std::cout << "setRawBits member function called" << std::endl;
 	this->_fixed = raw;
 }
 

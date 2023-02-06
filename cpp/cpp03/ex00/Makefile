@@ -2,14 +2,14 @@ CXX = c++
 
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-NAME = canon
+NAME = ClapTrap
 
-SRCS =	Fixed.cpp\
-		main.cpp
+SRCS =	ClapTrap.cpp\
+		main.cpp 
 
 OBJ_DIR = obj
 
-OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o)) 
+OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o))
 
 RM = rm -f
 

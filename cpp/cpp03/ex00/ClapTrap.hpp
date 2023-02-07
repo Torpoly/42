@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 23:33:04 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/06 23:40:21 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/07 15:23:53 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,21 @@
 #include <iostream>
 #include <cstdlib>
 
+enum status {
+	DEAD,
+	ALIVE	
+};
+
 class ClapTrap{
 	
 	public:
 	
 		ClapTrap( void );
 		ClapTrap( std::string name );
-		ClapTrap( const ClapTrap & to_copy );
-		
+		ClapTrap( const ClapTrap & src );
+		ClapTrap & 	operator=( ClapTrap const & rhs );
 		~ClapTrap( void );
 
-		ClapTrap & 	operator=( ClapTrap const & rhs );
 		
 		void		attack(const std::string& target);
 		void 		takeDamage(unsigned int amount);

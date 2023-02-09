@@ -1,6 +1,6 @@
 CXX = c++
 
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD -MP
 
 NAME = ScavTrap
 
@@ -10,7 +10,12 @@ SRCS =	ClapTrap.cpp \
 
 OBJ_DIR = obj
 
+DEPS_FILES = ClapTrap.hpp \
+			 ScavTrap.hpp 
+
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o))
+
+DEPS = $(addprefix $(OBJ_DIR)/, $(DEPS_FILES:.hpp=.d))
 
 RM = rm -f
 
@@ -24,12 +29,13 @@ $(OBJ_DIR)/%.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(OBJS)
-	rmdir $(OBJ_DIR) || true
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+-include $(DEPS)
 
 .PHONY: all clean fclean re

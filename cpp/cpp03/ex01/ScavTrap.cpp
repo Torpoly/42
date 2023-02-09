@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 01:11:28 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/09 01:43:57 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/09 17:11:31 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ ScavTrap::ScavTrap( void ) : ClapTrap() {
 	this->_attack_damage = 20;
 }
 
-ScavTrap::ScavTrap( const ScavTrap & to_copy ) : ClapTrap() {
+ScavTrap::ScavTrap( const ScavTrap & to_copy ) : ClapTrap( to_copy ) {
 
 	std::cout << "ScavTrap copy constructor called" << std::endl;
 	*this = to_copy; 
@@ -65,7 +65,7 @@ void	ScavTrap::attack( const std::string & target ) {
 }
 
 void	ScavTrap::guardGate( void ) {
-	if (this->_energy_points == DEAD)
+	if (this->_hit_points == DEAD)
 		std::cout << "ScavTrap " << this->_name << " can't keep the gate because it's dead" << std::endl;
 	else
 		std::cout << "ScavTrap " << this->_name << " is now keeping the gate !" << std::endl;

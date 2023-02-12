@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 01:17:45 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/12 23:56:13 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/13 00:18:36 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@
 //canon
 Animal::Animal( void ) {
 
+	std::cout << "Default Animal constructor called" << std::endl;
 	this->_type = "Animal";
 	return ;
 }
 
 Animal::Animal( const Animal & to_copy ) {
+
+	std::cout << "Copy Animal constructor called" << std::endl;
 	*this = to_copy;
 }
 
@@ -31,6 +34,7 @@ Animal & Animal::operator=( const Animal & rhs ) {
 
 Animal::~Animal( void ) {
 
+	std::cout << "Default Animal destructor called" << std::endl;
 	return ;
 }
 

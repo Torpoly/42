@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 01:20:38 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/13 00:00:21 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/13 00:24:03 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@
 //canon
 WrongAnimal::WrongAnimal( void ) {
 
+	std::cout << "Default WrongAnimal constructor called" << std::endl;
 	this->_type = "WrongAnimal";
 	return ;
 }
 
 WrongAnimal::WrongAnimal( const WrongAnimal & to_copy ) {
+
+	std::cout << "Copy WrongAnimal constructor called" << std::endl;
 	*this = to_copy;
 }
 
@@ -31,6 +34,7 @@ WrongAnimal & WrongAnimal::operator=( const WrongAnimal & rhs ) {
 
 WrongAnimal::~WrongAnimal( void ) {
 
+	std::cout << "Default WrongAnimal destructor called" << std::endl;
 	return ;
 }
 

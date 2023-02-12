@@ -6,14 +6,15 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 01:17:40 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/12 01:36:50 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/12 23:58:32 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_H
-# define ANIMAL_H
+#ifndef ANIMAL_HPP
+# define ANIMAL_HPP
 
 #include <iostream>
+#include <cstdlib>
 
 class Animal {
 	
@@ -28,7 +29,7 @@ class Animal {
 		
 		virtual void makeSound( void ) const;
 		
-		virtual const std::string & getType( void ) const;
+		const std::string & getType( void ) const;
 	
 	
 	protected:

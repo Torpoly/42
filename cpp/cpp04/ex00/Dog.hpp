@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 01:20:30 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/12 01:38:19 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/12 23:48:54 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ class Dog : public Animal {
 		
 		
 		virtual void makeSound( void ) const;
-		
-		virtual const std::string & getType( void ) const;
 		
 };
 

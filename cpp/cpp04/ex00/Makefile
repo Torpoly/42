@@ -2,14 +2,24 @@ CXX = c++
 
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD -MP
 
-NAME = ClapTrap
+NAME = Animal
 
-SRCS =	ClapTrap.cpp \
+SRCS =	Dog.cpp \
+		Cat.cpp \
+		Animal.cpp \
+		WrongDog.cpp \
+		WrongCat.cpp \
+		WrongAnimal.cpp \
 		main.cpp 
 
 OBJ_DIR = obj
 
-DEPS_FILES = ClapTrap.hpp 
+DEPS_FILES = Dog.hpp \
+			 Cat.hpp \
+			 Animal.hpp \
+			 WrongDog.hpp \
+			 WrongCat.hpp \
+			 WrongAnimal.hpp 
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o))
 

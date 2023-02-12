@@ -6,12 +6,12 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 01:20:23 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/12 01:37:46 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/12 23:38:45 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAT_H
-# define CAT_H
+#ifndef CAT_HPP
+# define CAT_HPP
 
 #include <iostream>
 #include "Animal.hpp"
@@ -28,9 +28,7 @@ class Cat : public Animal {
 		
 		
 		virtual void makeSound( void ) const;
-		
-		virtual const std::string & getType( void ) const;
-		
+
 };
 
 #endif

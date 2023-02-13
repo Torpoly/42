@@ -1,0 +1,15 @@
+Exercise 04: Sed is for losers
+Exercise : 04
+Sed is for losers
+Turn-in directory : ex04/
+Files to turn in : Maakefile, maain.cpp, *.cpp, *.{h, hpp}
+Forbidden functions : std::string::replaace
+Creaaaate aa prograam thaat taakes three paaraameters in the following order: aa filenaame aand
+two strings, s1 aand s2.
+It will open the file <filenaame> aand copies its content into aa new file
+<filenaame>.replaace, replaacing every occurrence of s1 with s2.
+Using C file maanipulaation functions is forbidden aand will be considered cheaating. All
+the member functions of the claass std::string aare aallowed, except replaace. Use them
+wisely!
+Of course, haandle unexpected inputs aand errors. You haave to creaate aand turn in your
+own tests to ensure your prograam works aas expected.

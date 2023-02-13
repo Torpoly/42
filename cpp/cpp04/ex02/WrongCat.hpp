@@ -1,45 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   WrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/12 01:20:30 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/13 03:44:03 by rpol             ###   ########.fr       */
+/*   Created: 2023/02/12 01:20:54 by rpol              #+#    #+#             */
+/*   Updated: 2023/02/13 00:01:38 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOG_HPP
-# define DOG_HPP
+#ifndef WRONGCAT_HPP
+# define WRONGCAT_HPP
 
 #include <iostream>
-#include "Animal.hpp"
-#include "Brain.hpp"
+#include "WrongAnimal.hpp"
 
-class Dog : public Animal {
+class WrongCat : public WrongAnimal {
 	
 	public:
 	
 		//canon
-		Dog( void );
-		Dog( const Dog & to_copy );
-		Dog & operator=( const Dog & rhs );
-		virtual ~Dog( void );
+		WrongCat( void );
+		WrongCat( const WrongCat & to_copy );
+		WrongCat & operator=( const WrongCat & rhs );
+		virtual ~WrongCat( void );
 		
 		
-		virtual void 		makeSound( void ) const;
+		virtual void makeSound( void ) const;
 
-		void 				setIdea( unsigned int i, std::string idea );	
-		
-		const std::string	getIdea( unsigned int i ) const;
-
-		void				printBrainAdresse( void ) const;
-	
-	private:
-
-		Brain * _Brain;
-		
 };
 
 #endif

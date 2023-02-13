@@ -6,14 +6,14 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 01:20:26 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/13 03:29:07 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/13 03:43:39 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Dog.hpp"
 
 //canon
-Dog::Dog( void ) : Animal() {
+Dog::Dog( void ) : AAnimal() {
 
 std::cout << "Default Dog constructor called" << std::endl;
 	this->_type = "Dog";
@@ -21,7 +21,7 @@ std::cout << "Default Dog constructor called" << std::endl;
 	return ;
 }
 
-Dog::Dog( const Dog & to_copy ) : Animal( to_copy ) {
+Dog::Dog( const Dog & to_copy ) : AAnimal( to_copy ) {
 
 	std::cout << "Copy Dog constructor called" << std::endl;
 	this->_Brain = new Brain();
@@ -48,6 +48,11 @@ Dog::~Dog( void ) {
 void	Dog::makeSound( void ) const {
 	
 	std::cout << "* ˁ˚ᴥ˚ˀ Wouaf *" << std::endl;
+}
+
+const	std::string & Dog::getType( void ) const {
+	
+	return ( this->_type );
 }
 
 void	Dog::setIdea( unsigned int i, std::string idea ) {

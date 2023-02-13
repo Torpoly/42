@@ -6,14 +6,14 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 01:20:20 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/13 03:29:30 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/13 03:43:19 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cat.hpp"
 
 //canon
-Cat::Cat( void ) : Animal() {
+Cat::Cat( void ) : AAnimal() {
 
 	std::cout << "Default Cat constructor called" << std::endl;
 	this->_type = "Cat";
@@ -21,7 +21,7 @@ Cat::Cat( void ) : Animal() {
 	return ;
 }
 
-Cat::Cat( const Cat & to_copy ) : Animal( to_copy ) {
+Cat::Cat( const Cat & to_copy ) : AAnimal( to_copy ) {
 	
 	std::cout << "Copy Cat constructor called" << std::endl;
 	this->_Brain = new Brain( *to_copy._Brain );
@@ -48,6 +48,11 @@ Cat::~Cat( void ) {
 void	Cat::makeSound( void ) const {
 	
 	std::cout << "* =^..^= Miaou *" << std::endl;
+}
+
+const	std::string & Cat::getType( void ) const {
+	
+	return ( this->_type );
 }
 
 void	Cat::setIdea( unsigned int i, std::string idea ) {

@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/12 01:20:30 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/13 03:44:03 by rpol             ###   ########.fr       */
+/*   Created: 2023/02/12 01:20:23 by rpol              #+#    #+#             */
+/*   Updated: 2023/02/13 03:42:26 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOG_HPP
-# define DOG_HPP
+#ifndef CAT_HPP
+# define CAT_HPP
 
 #include <iostream>
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 #include "Brain.hpp"
 
-class Dog : public Animal {
+class Cat : public AAnimal {
 	
 	public:
 	
 		//canon
-		Dog( void );
-		Dog( const Dog & to_copy );
-		Dog & operator=( const Dog & rhs );
-		virtual ~Dog( void );
+		Cat( void );
+		Cat( const Cat & to_copy );
+		Cat & operator=( const Cat & rhs );
+		virtual ~Cat( void );
 		
 		
-		virtual void 		makeSound( void ) const;
+		virtual void		makeSound( void ) const;
 
+		const std::string &	getType( void ) const;
+		
 		void 				setIdea( unsigned int i, std::string idea );	
 		
 		const std::string	getIdea( unsigned int i ) const;
@@ -39,7 +41,7 @@ class Dog : public Animal {
 	private:
 
 		Brain * _Brain;
-		
+
 };
 
 #endif

@@ -1,45 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/12 01:20:30 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/13 03:44:03 by rpol             ###   ########.fr       */
+/*   Created: 2023/02/12 01:20:43 by rpol              #+#    #+#             */
+/*   Updated: 2023/02/12 23:59:31 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOG_HPP
-# define DOG_HPP
+#ifndef WRONGANIMAL_HPP
+# define WRONGANIMAL_HPP
 
 #include <iostream>
-#include "Animal.hpp"
-#include "Brain.hpp"
+#include <cstdlib>
 
-class Dog : public Animal {
+class WrongAnimal {
 	
 	public:
 	
 		//canon
-		Dog( void );
-		Dog( const Dog & to_copy );
-		Dog & operator=( const Dog & rhs );
-		virtual ~Dog( void );
+		WrongAnimal( void );
+		WrongAnimal( const WrongAnimal & to_copy );
+		WrongAnimal & operator=( const WrongAnimal & rhs );
+		virtual ~WrongAnimal( void );
 		
 		
-		virtual void 		makeSound( void ) const;
-
-		void 				setIdea( unsigned int i, std::string idea );	
+		void makeSound( void ) const;
 		
-		const std::string	getIdea( unsigned int i ) const;
-
-		void				printBrainAdresse( void ) const;
+		const std::string & getType( void ) const;
 	
-	private:
-
-		Brain * _Brain;
-		
+	
+	protected:
+	
+		std::string _type;
+	
 };
 
 #endif

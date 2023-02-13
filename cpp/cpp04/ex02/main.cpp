@@ -6,48 +6,32 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 01:17:36 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/13 03:52:39 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/13 03:48:07 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
 
 int main( void ) {
 
-const Animal* j = new Dog();
-const Animal* i = new Cat();
+{
+	
+const AAnimal* j = new Dog();
+const AAnimal* i = new Cat();
 
-std::cout << std::endl;
-
-std::cout << j->getType() << std::endl;
-std::cout << i->getType() << std::endl;
-
-std::cout << std::endl;
+//const AAnimal* k = new AAnimal();
+//std::cout << k->getType() << std::endl;
+//delete k;
 
 delete j;//should not create a leak
 delete i;
 
 std::cout << std::endl;
-std::cout << "------------------------------------------------------------------------------"<< std::endl;
-
-const Animal* k = new Animal();
-
-std::cout << std::endl;
-
-std::cout << k->getType() << std::endl;
-
-
-std::cout << std::endl;
-
-delete k;//should not create a leak
-
-std::cout << std::endl;
-std::cout << "------------------------------------------------------------------------------"<< std::endl;
 
 int n = 10;
-Animal* animals[n];
+AAnimal* animals[n];
 	for(int i = 0; i < n; i++){
 		if (i % 2)
 			animals[i] = new Cat();
@@ -58,7 +42,6 @@ Animal* animals[n];
 		delete animals[i];
 
 std::cout << std::endl;
-std::cout << "------------------------------------------------------------------------------"<< std::endl;
 
 Dog* dog1 = new Dog();
 dog1->setIdea( 0, "I want to be the bestest of good boys" );
@@ -76,6 +59,10 @@ delete dog1;
 delete dog2;
 
 std::cout << std::endl;
+
+}
+
+
 
 return ( EXIT_SUCCESS );
 }

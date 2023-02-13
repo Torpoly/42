@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 01:20:30 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/13 03:44:03 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/13 03:43:54 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 # define DOG_HPP
 
 #include <iostream>
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 #include "Brain.hpp"
 
-class Dog : public Animal {
+class Dog : public AAnimal {
 	
 	public:
 	
@@ -29,6 +29,8 @@ class Dog : public Animal {
 		
 		
 		virtual void 		makeSound( void ) const;
+
+		const std::string &	getType( void ) const;
 
 		void 				setIdea( unsigned int i, std::string idea );	
 		

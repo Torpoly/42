@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 01:17:36 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/13 00:28:03 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/13 14:47:29 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ const WrongAnimal* Wrong_i = new WrongCat();
 
 std::cout << std::endl;
 
+std::cout << Wrong_meta->getType() << " " << std::endl;
 std::cout << Wrong_i->getType() << " " << std::endl;
 
 std::cout << std::endl;
@@ -63,6 +64,15 @@ std::cout << std::endl;
 
 delete Wrong_meta;
 delete Wrong_i;
+
+const WrongCat* Wrong_cat = new WrongCat();
+
+std::cout << Wrong_cat->getType() << " " << std::endl;
+Wrong_cat->makeSound(); //will output the Wrong cat sound!
+
+std::cout << std::endl;
+
+delete Wrong_cat;
 
 }
 

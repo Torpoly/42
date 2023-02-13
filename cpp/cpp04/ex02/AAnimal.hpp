@@ -29,12 +29,7 @@ class AAnimal {
 		
 		virtual void 				makeSound( void ) const = 0;
 		
-		virtual const std::string &	getType( void ) const = 0;
-
-		virtual void 				setIdea( unsigned int i, std::string idea ) = 0;	
-		
-		virtual const std::string	getIdea( unsigned int i ) const = 0;
-	
+		virtual const std::string &	getType( void ) const ;
 	
 	protected:
 	

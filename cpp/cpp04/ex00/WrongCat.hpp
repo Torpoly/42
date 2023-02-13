@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   WrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 01:20:54 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/13 00:01:38 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/13 14:36:40 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ class WrongCat : public WrongAnimal {
 		virtual ~WrongCat( void );
 		
 		
-		virtual void makeSound( void ) const;
+		void makeSound( void ) const;
 
 };
 

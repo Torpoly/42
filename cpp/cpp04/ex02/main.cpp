@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 01:17:36 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/13 03:48:07 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/13 15:04:53 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int main( void ) {
 const AAnimal* j = new Dog();
 const AAnimal* i = new Cat();
 
-//const AAnimal* k = new AAnimal();
-//std::cout << k->getType() << std::endl;
-//delete k;
+// const AAnimal* k = new AAnimal();
+// std::cout << k->getType() << std::endl;
+// delete k;
 
 delete j;//should not create a leak
 delete i;

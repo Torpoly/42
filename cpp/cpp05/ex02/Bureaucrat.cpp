@@ -6,7 +6,7 @@
 /*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:18:41 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/15 01:49:34 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/15 01:49:24 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ std::string	Bureaucrat::getName( void ) const {
 	return ( this->_name );
 }
 
-void		Bureaucrat::signForm ( Form & formToSign) {
+void		Bureaucrat::signForm( AForm & formToSign) {
 	
 	if ( formToSign.beSigned( *this ) )
 		std::cout << this->getName() << " signed " << formToSign.getName() << std::endl;
@@ -109,6 +109,16 @@ void		Bureaucrat::signForm ( Form & formToSign) {
 		std::cout << this->getName() << " couldn't sign " << formToSign.getName() << " because their grade was too low"<< std::endl;
 	else
 		std::cout << this->getName() << " couldn't sign " << formToSign.getName() << " because it was already signed"<< std::endl;
+}
+
+void			Bureaucrat::execute( AForm const & form ) const {
+
+	if ( form.execute( *this ) )
+		std::cout << this->getName() << " executed " << form.getName() << std::endl;
+	else if ( this->getGrade() > form.getGradeToSign() )
+		std::cout << this->getName() << " couldn't execute " << form.getName() << " because their grade was too low"<< std::endl;
+	else
+		std::cout << this->getName() << " couldn't execute " << form.getName() << " because it was not signed"<< std::endl;
 }
 
 const char*	Bureaucrat::GradeTooHighException::what( void ) const throw() {

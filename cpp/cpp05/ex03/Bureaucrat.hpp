@@ -6,7 +6,7 @@
 /*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:18:46 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/15 02:47:26 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/15 14:38:47 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "Intern.hpp"
 
 #define HIGHEST_POSSIBLE_GRADE 1
 #define LOWEST_POSSIBLE_GRADE 150

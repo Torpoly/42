@@ -2,14 +2,14 @@ CXX = c++
 
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD -MP
 
-NAME = Bureaucrat
+NAME = Conversion
 
-SRCS =	Bureaucrat.cpp \
+SRCS =	Conversion.cpp \
 		main.cpp 
 
 OBJ_DIR = obj
 
-DEPS_FILES = Bureaucrat.hpp
+DEPS_FILES = Conversion.hpp
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o))
 

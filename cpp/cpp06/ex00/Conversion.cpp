@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Conversion.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:36:50 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/16 17:39:13 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/17 16:37:00 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,10 @@ void	Conversion::_castInt( void ) const {
 
 	int n = atoi( this->getInput().c_str() );
 	
-	this->_printChar( static_cast<char>( n ) );
+	if ( n >= CHAR_MIN && n <= CHAR_MAX )
+		this->_printChar( static_cast<char>( n ) );
+	else
+		std::cout << "char: impossible" << std::endl;
 
 	this->_printInt( n );
 
@@ -194,25 +197,47 @@ void	Conversion::_castFloat( void ) const {
 
 	float f = static_cast<float>( atof( this->getInput().c_str() ));
 	
-	this->_printChar( static_cast<char>( f ) );
+	if ( static_cast<int>( f )  >= CHAR_MIN &&
+			static_cast<int>( f ) <=  CHAR_MAX )
+		this->_printChar( static_cast<char>( f ) );
+	else
+		std::cout << "char: impossible" << std::endl;
 
-	this->_printInt( static_cast<int>( f ) );
+	if ( static_cast<long int>( f )  >= INT_MIN &&
+			static_cast< long int>( f ) <= INT_MAX )
+		
+		this->_printInt( static_cast<int>( f ) );
+	else
+		std::cout << "int: impossible" << std::endl;
 
 	this->_printFloat( f );
 
 	this->_printDouble( static_cast<double>( f ) );
-	
+
 }
 
 void	Conversion::_castDouble( void ) const {
 
 	double d = atof( this->getInput().c_str() );
 	
-	this->_printChar( static_cast<char>( d ) );
+	if ( static_cast<int>( d )  >= CHAR_MIN &&
+			static_cast<int>( d ) <=  CHAR_MAX )
+		this->_printChar( static_cast<char>( d ) );
+	else
+		std::cout << "char: impossible" << std::endl;
 
-	this->_printInt( static_cast<int>( d ) );
+	if ( static_cast<long int>( d )  >= INT_MIN &&
+			static_cast< long int>( d ) <= INT_MAX )
+		
+		this->_printInt( static_cast<int>( d ) );
+	else
+		std::cout << "int: impossible" << std::endl;
 
-	this->_printFloat( static_cast<float>( d ) );
+	if ( d >= FLT_MIN && d <= FLT_MAX )
+		
+		this->_printFloat( static_cast<float>( d ) );
+	else
+		std::cout << "float: impossible" << std::endl;
 
 	this->_printDouble( d );
 	

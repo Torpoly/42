@@ -6,54 +6,67 @@
 /*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 12:47:59 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/18 17:48:08 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/18 20:02:45 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "iter.hpp"
+#include "Array.hpp"
+#include <cstdlib>
+#include <ctime>
 
-// class Awsome {
-	
-// 	public :
-// 	Awsome(void) : _n(42) {return;}
-// 	int get(void) const {return this->_n;}
-// 	private:
-// 	int _n;
-// };
-// std::ostream & operator<<( std::ostream & o, Awsome const & rhs ) {o << rhs.get(); return o;}
-
-// template< typename T >
-// void	print( T const & x ) {
-
-// 	std::cout << x << std::endl;
-// 	return;
-// }
+#define SIZE 10
 
 int main( void ) {
 
-	size_t size = 5;
+	Array<int> empty(0);
+    Array<int> numbers(SIZE);
+    int* tab = new int[SIZE];
+    srand(time(NULL));
+
+    for (int i = 0; i < SIZE; i++)
+    {
+        const int value = rand();
+        numbers[i] = value;
+        tab[i] = value;
+    }
+    
+    {
+        Array<int> tmp = numbers;
+    }
+
+    for (int i = 0; i < SIZE; i++)
+    {
+        std::cout	<< "Array[" << i << "] is " << numbers[i]
+					<< ", Tab[" << i << "] is " << tab[i] << std::endl;
+    }
 	
-	std::cout << std::endl;
-	std::cout << "___PASSING__AN__INT__ARRAY_____" << std::endl << std::endl;
-
-	int array[] = {1,2,3,4,5};
-	iter( array, size, printIndex);
+    try
+    {
+        numbers[-1] = 0;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
 	
+    try
+    {
+        numbers[SIZE] = 0;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
 
-	std::cout << std::endl;
-	std::cout << "___PASSING__A__STRING__ARRAY_____" << std::endl << std::endl;
-	
-	std::string Array[] = {"a","b","c","d","e"};
-	iter( Array, size, printIndex);
+	try
+    {
+        numbers[42] = 0;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
 
-
-	// std::cout << std::endl;
-	// std::cout << "___PASSING__A__CLASS__ARRAY_____" << std::endl << std::endl;
-
-	// Awsome tab[size];
-	// iter( tab, size, print);
-
-	std::cout << std::endl;
-	
+    delete [] tab;
 	return ( EXIT_SUCCESS );
 }

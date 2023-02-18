@@ -2,13 +2,13 @@ CXX = c++
 
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD -MP
 
-NAME = Iter
+NAME = Array
 
 SRCS = main.cpp 
 
 OBJ_DIR = obj
 
-DEPS_FILES = iter.hpp
+DEPS_FILES = Array.hpp
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o))
 

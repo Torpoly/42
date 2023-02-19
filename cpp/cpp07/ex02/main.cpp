@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 12:47:59 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/18 20:02:45 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/19 11:41:54 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,59 +14,78 @@
 #include <cstdlib>
 #include <ctime>
 
-#define SIZE 10
+
 
 int main( void ) {
 
-	Array<int> empty(0);
-    Array<int> numbers(SIZE);
-    int* tab = new int[SIZE];
+    size_t size = 10;
+    
+    Array<int> array(size);
+    
     srand(time(NULL));
-
-    for (int i = 0; i < SIZE; i++)
-    {
-        const int value = rand();
-        numbers[i] = value;
-        tab[i] = value;
+    for (size_t index = 0; index < size; index++) {
+        
+        array[ index ] = rand() % 10;
     }
     
+
     {
-        Array<int> tmp = numbers;
+        Array<int> tmp = array;
+        std::cout << tmp << std::endl << std::endl;
+        std::cout << array << std::endl << std::endl;
+        array[ size - 1 ] = 42;
+        std::cout << tmp << std::endl << std::endl;
+        std::cout << array << std::endl << std::endl;
     }
 
-    for (int i = 0; i < SIZE; i++)
+    
+    try
     {
-        std::cout	<< "Array[" << i << "] is " << numbers[i]
-					<< ", Tab[" << i << "] is " << tab[i] << std::endl;
+        array[-1] = 0;
+    }
+    catch(const std::exception& e)
+    {
+        std::cout << e.what() << std::endl;
     }
 	
     try
     {
-        numbers[-1] = 0;
+        array[size] = 0;
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() << std::endl;
-    }
-	
-    try
-    {
-        numbers[SIZE] = 0;
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << std::endl;
+        std::cout << e.what() << std::endl;
     }
 
 	try
     {
-        numbers[42] = 0;
+        array[42] = 0;
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() << std::endl;
+        std::cout << e.what() << std::endl;
     }
 
-    delete [] tab;
+    std::cout << std::endl;
+    
+    Array<char> arrayC(size);
+    
+    for (size_t index = 0; index < size; index++) {
+        
+        arrayC[ index ] = 'a' + index ;
+    }
+    std::cout << arrayC << std::endl;
+
+    Array< std::string > arrayStr(size);
+    
+    std::string str = "string";
+    std::string strA[] = {"_a","_b","_c","_d","_e","_f","_g","_h","_i","_j"};
+    
+    for (size_t index = 0; index < size; index++) {
+        
+        arrayStr[ index ] = str.append( strA[ index ].c_str() ) ;
+    }
+    std::cout << arrayStr << std::endl;
+    
 	return ( EXIT_SUCCESS );
 }

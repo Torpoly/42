@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Array.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 12:43:13 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/18 19:58:38 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/19 11:31:01 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ class Array {
 		};
 		//end of canon
 		
-		Array (size_t size) :
+		Array ( size_t size ) :
 			
 			_array( new T[size] ),
 			_size( size ) {
@@ -101,6 +101,16 @@ class Array {
 			
 			size_t 	_size;
 			
+};
+
+template<typename T>
+std::ostream & operator<<( std::ostream & o, Array<T> & toTheRight ) {
+	
+	for( size_t index = 0; index < toTheRight.size(); ++index ) {
+		
+		o << "Array[ "<< index << " ] = " << toTheRight[ index ] << std::endl;
+	}
+	return o;
 };
 
 #endif

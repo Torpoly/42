@@ -2,13 +2,14 @@ CXX = c++
 
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD -MP
 
-NAME = Functions
+NAME = Span
 
-SRCS = main.cpp 
+SRCS = main.cpp \
+	   Span.cpp
 
 OBJ_DIR = obj
 
-DEPS_FILES = whatever.hpp
+DEPS_FILES = Span.hpp
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o))
 

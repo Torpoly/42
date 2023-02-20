@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 21:51:45 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/19 22:16:15 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/20 22:36:33 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typename T::iterator easyfind( T & container, int value) {
 	
     if ( it != container.end() ) {
         
-		return ( it );
+		    return ( it );
 		
     } else {
 		

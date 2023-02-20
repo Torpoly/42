@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:25:40 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/20 18:17:50 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/20 22:52:53 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,24 @@ int main( void ) {
 	
 	
 	std::cout << std::endl << "__TRYING__TO__ADD__EXTRA__NUMBER__IN__CONTAINER__" << std::endl << std::endl;
-	
-	try {
-		
-		sp.addNumber(11);
-		
-    } catch ( const std::runtime_error & e ) {
-		
-        std::cerr << e.what() << std::endl;
-    }
+
+	sp.addNumber(11);
 
 
 
 	std::cout << std::endl << "__PRINTING__INT__CONTAINER__" << std::endl << std::endl;
 	
 	sp.print();
+
+	std::cout << std::endl;
+
+	Span sr = Span(10);
+
+	sr.addRange( 5, -4 );
+
+	std::cout << std::endl;
+
+	sr.print();
 	
 	std::cout << std::endl;
 	

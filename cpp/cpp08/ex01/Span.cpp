@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Span.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:25:43 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/20 18:16:10 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/20 22:55:58 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,59 @@ Span::Span( size_t N ) {
 
 void	Span::addNumber( const int number ) {
 
-	if ( this->_container.size() < this->_size) {
-
-		this->_container.push_back( number );		
+	try {
+	
+		if ( this->_container.size() < this->_size) {
 		
-	} else {
-
-		throw std::runtime_error( "Can't add new number because size is reached" );
-	}
+			this->_container.push_back( number );		
+			
+		} else {
+		
+			throw std::runtime_error( "Can't add new number because size is reached" );
+		}
+	} catch ( const std::runtime_error & e ) {
+		
+        std::cerr << e.what() << std::endl;
+    }
 }
 
-int	Span::shortestSpan( void ) const {
+void Span::addRange(const int rangeStart, const int rangeEnd) {
+	
+	try {
+		
+		int rangeSpan = std::abs( rangeEnd - rangeStart );
+		
+    	if ( this->_container.size() + ( rangeSpan + 1 ) <= this->_size ) {
+			
+    	    std::vector<int> range;
+			int index = rangeStart;
+			
+			while( 1 ) {
+				
+				range.push_back( index );
+
+				if ( index == rangeEnd )
+					break;
+				
+				if ( rangeStart < rangeEnd )
+					index++;
+				else
+					index--;
+			}
+			
+    	    this->_container.insert( this->_container.end(), range.begin(), range.end() );
+    	} else {
+			
+    	    throw std::runtime_error("Can't add the range because size will be reached");
+			
+    	}
+	} catch ( const std::runtime_error & e ) {
+		
+        std::cerr << e.what() << std::endl;
+    }
+}	
+
+long	Span::shortestSpan( void ) const {
 
 	if ( this->_container.size() < 2) {
 		
@@ -66,7 +108,7 @@ int	Span::shortestSpan( void ) const {
 	std::vector<int> tmp( this->_container );
 	std::sort(tmp.begin(), tmp.end());
 
-	int min_diff = INT_MAX;
+	long min_diff = LONG_MAX;
 
     for (std::vector<int>::iterator it = tmp.begin(); it != tmp.end() - 1; ++it) {
         int diff = *(it + 1) - *it;
@@ -75,10 +117,10 @@ int	Span::shortestSpan( void ) const {
         }
     }
 
-    return min_diff;
+    return ( min_diff );
 }
 
-int	Span::longestSpan( void ) const {
+long	Span::longestSpan( void ) const {
 	
 	if ( this->_container.size() < 2) {
 		

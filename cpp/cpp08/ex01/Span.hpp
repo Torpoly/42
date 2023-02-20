@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Span.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:25:48 by rpol              #+#    #+#             */
-/*   Updated: 2023/02/20 18:00:18 by rpol             ###   ########.fr       */
+/*   Updated: 2023/02/20 22:36:07 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,15 @@ class  Span {
 		Span & operator=( const Span & toTheRight );
 		~Span( void );
 
-		Span( size_t N );
+		Span( size_t N );	
 
 		void			addNumber( const int number );
+
+		void			addRange( const int rangeStart, const int rangeEnd );
 		
-		int				shortestSpan( void ) const ;
+		long			shortestSpan( void ) const ;
 		
-		int				longestSpan( void ) const ;
+		long			longestSpan( void ) const ;
 
 		void			print( void ) const;
 

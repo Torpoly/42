@@ -2,13 +2,13 @@ CXX = c++
 
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD -MP
 
-NAME = Functions
+NAME = MutantStack
 
 SRCS = main.cpp 
 
 OBJ_DIR = obj
 
-DEPS_FILES = whatever.hpp
+DEPS_FILES = MutantStack.hpp
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o))
 

@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 21:43:26 by rpol              #+#    #+#             */
-/*   Updated: 2023/03/25 01:26:27 by rpol             ###   ########.fr       */
+/*   Updated: 2023/03/27 00:20:49 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,19 @@ BitcoinExchange::BitcoinExchange( const BitcoinExchange &toCopy ) {
 
 BitcoinExchange &BitcoinExchange::operator=( const BitcoinExchange &toTheRight ) {
 	
-    if (this != &toTheRight) {
-		
-        this->_historical_prices = toTheRight._historical_prices;
+    if (this == &toTheRight) {
+        return *this;
     }
+	this->_historical_prices = toTheRight._historical_prices;
     return *this;
 }
 
-bool BitcoinExchange::readFile( const std::string &filename ) {
+void BitcoinExchange::readFile( const std::string &filename ) {
 	
     std::ifstream file(filename.c_str());
     if (!file.is_open()) {
-        return false;
+		throw std::runtime_error("could not open " + filename);
+        return;
     }
 
     std::string line;
@@ -56,7 +57,7 @@ bool BitcoinExchange::readFile( const std::string &filename ) {
     }
 
     file.close();
-    return true;
+    return;
 }
 
 bool BitcoinExchange::isValidInput(const std::string& line, std::string& date, double& value) {
@@ -95,7 +96,7 @@ bool BitcoinExchange::isValidInput(const std::string& line, std::string& date, d
 	int daysInMonth[] = {31, 28 + ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 	if (day < 1 || day > daysInMonth[month - 1]) {
 		bonus = " * (╯°□°)╯︵ ┻━┻  COUNT ON YOUR KNUCKLES *";
-		std::cerr << "Error: bad input => " << line << std::endl;
+		std::cerr << "Error: bad input => " << line << bonus << std::endl;
         return false;
 	}
 	
@@ -131,7 +132,7 @@ bool BitcoinExchange::isValidInput(const std::string& line, std::string& date, d
 void BitcoinExchange::processData(const std::string& inputFile) {
     std::ifstream file(inputFile.c_str());
     if (!file.is_open()) {
-        std::cerr << "Error: could not open " << inputFile << std::endl;
+		throw std::runtime_error("could not open " + inputFile);
         return;
     }
 
@@ -152,7 +153,7 @@ void BitcoinExchange::processData(const std::string& inputFile) {
 				--it;
 			double exchange_rate = it->second;
 			double result = value * exchange_rate;
-			std::cout << date << " => " << static_cast<int>(value) << " = " <<std::setprecision(2) << result << std::endl;
+			std::cout << date << " => " << static_cast<int>(value) << " = " << std::fixed << std::setprecision(2) << result << std::endl;
 		}
     }
 

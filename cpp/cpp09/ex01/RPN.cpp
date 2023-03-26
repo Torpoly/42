@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 01:36:58 by rpol              #+#    #+#             */
-/*   Updated: 2023/03/25 01:55:47 by rpol             ###   ########.fr       */
+/*   Updated: 2023/03/27 00:20:10 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ RPN::~RPN( void ) {
 }
 
 double RPN::evaluate( const std::string &expression ) {
-	std::stack<double> s;
 	std::stringstream ss(expression);
 	std::string token;
 
@@ -52,32 +51,34 @@ double RPN::evaluate( const std::string &expression ) {
 		}
 		
 		if (token == "+" || token == "-" || token == "*" || token == "/") {
-			if (s.size() < 2) {
+			if (this->_stack.size() < 2) {
 				throw std::runtime_error("Invalid RPN expression.");
 			}
-			double b = s.top(); s.pop();
-			double a = s.top(); s.pop();
+			double b = this->_stack.top(); 
+			this->_stack.pop();
+			double a = this->_stack.top(); 
+			this->_stack.pop();
 
 			if (token == "+") {
-				s.push(a + b);
+				this->_stack.push(a + b);
 			} else if (token == "-") {
-				s.push(a - b);
+				this->_stack.push(a - b);
 			} else if (token == "*") {
-				s.push(a * b);
+				this->_stack.push(a * b);
 			} else if (token == "/") {
 				if (b == 0) {
 					throw std::runtime_error("Division by zero.");
 				}
-				s.push(a / b);
+				this->_stack.push(a / b);
 			}
 		} else {
-			s.push(atof(token.c_str()));
+			this->_stack.push(atof(token.c_str()));
 		}
 	}
 
-	if (s.size() != 1) {
+	if (this->_stack.size() != 1) {
 		throw std::runtime_error("Invalid RPN expression.");
 	}
 
-	return s.top();
+	return this->_stack.top();
 }

@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 01:36:54 by rpol              #+#    #+#             */
-/*   Updated: 2023/03/25 01:48:59 by rpol             ###   ########.fr       */
+/*   Updated: 2023/03/27 00:19:58 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ class RPN {
 
 		/////// METHODS /////////
 		double evaluate( const std::string &expression );
+	
+	private:
 
+		std::stack<double> _stack;
 };
 
 #endif

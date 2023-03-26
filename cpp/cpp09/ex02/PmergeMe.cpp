@@ -6,7 +6,7 @@
 /*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 18:12:25 by rpol              #+#    #+#             */
-/*   Updated: 2023/03/26 23:36:49 by rpol             ###   ########.fr       */
+/*   Updated: 2023/03/27 00:20:24 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ PmergeMe &PmergeMe::operator=( const PmergeMe &toTheRight ) {
 	return *this;
 }
 
-PmergeMe::~PmergeMe() {
+PmergeMe::~PmergeMe( void ) {
+	
+	return;
 }
 
 void PmergeMe::_merge_insert_sort_list( std::list<int> &lst ) {

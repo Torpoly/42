@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 21:43:26 by rpol              #+#    #+#             */
-/*   Updated: 2023/03/27 00:20:49 by rpol             ###   ########.fr       */
+/*   Updated: 2023/03/27 15:50:02 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,17 @@ bool BitcoinExchange::isValidInput(const std::string& line, std::string& date, d
     std::stringstream ss(line);
     getline(ss, date, '|');
     if (date.length() != 11) {
-		// The string is not long enough to be a valid date.
+		
 		std::cerr << "Error: bad input => " << line << std::endl;
         return false;
 	}
 
-	// Extract the year, month, and day from the string.
+	
 	int year = atoi(date.substr(0, 4).c_str());
 	int month = atoi(date.substr(5, 2).c_str());
 	int day = atoi(date.substr(8, 2).c_str());
 
-	// Check if the year is valid (between 2009 and 2023).
+	// check if the year is ok
 	std::string bonus;
 	if (year < 1822 || year > 2023) {
 		if (year > 2023)
@@ -85,14 +85,14 @@ bool BitcoinExchange::isValidInput(const std::string& line, std::string& date, d
         return false;
 	}
 
-	// Check if the month is valid (between 1 and 12).
+	// check if the month is ok
 	if (month < 1 || month > 12) {
 		bonus = " * (╯°□°)╯︵ ┻━┻  GIVE ME GOOD MONTH *";
 		std::cerr << "Error: bad input => " << line << bonus << std::endl;
         return false;
 	}
 
-	// Check if the day is valid.
+	// check if this day exist for the year and month
 	int daysInMonth[] = {31, 28 + ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 	if (day < 1 || day > daysInMonth[month - 1]) {
 		bonus = " * (╯°□°)╯︵ ┻━┻  COUNT ON YOUR KNUCKLES *";
@@ -100,20 +100,24 @@ bool BitcoinExchange::isValidInput(const std::string& line, std::string& date, d
         return false;
 	}
 	
+	// say bitcoin did not exist
 	if (year < 2009) {
 		bonus = " * FYI : the bitcoin was created on 2009-01-02 *";
 		std::cerr << "Error: bad input => " << line << bonus << std::endl;
         return false;
 	}
 
+	// say bitcoin did not exist
 	if ( year == 2009 && month == 01 && day == 1) {
 		bonus = " * FYI : the bitcoin was created on 2009-01-02 *";
 		std::cerr << "Error: bad input => " << line << bonus << std::endl;
         return false;
 	}
     
+	// check if valur is a positive integer or the format is bad
 	if(ss >> value) {
 		if (value < 0 || value > 1000) {
+			
 			if (value < 0)
 				std::cerr << "Error: not a positive number." << std::endl;
 			else
@@ -122,6 +126,7 @@ bool BitcoinExchange::isValidInput(const std::string& line, std::string& date, d
 		}
 		return true;
 	} else {
+
 		bonus = " * FORMAT : date | value *";
 		std::cerr << "Error: bad input => " << line << bonus << std::endl;
         return false;
@@ -137,7 +142,9 @@ void BitcoinExchange::processData(const std::string& inputFile) {
     }
 
     std::string line;
-    getline(file, line); // Skip the header line
+
+	// skip date | value
+    getline(file, line); 
 
     while (getline(file, line)) {
         
@@ -156,6 +163,5 @@ void BitcoinExchange::processData(const std::string& inputFile) {
 			std::cout << date << " => " << static_cast<int>(value) << " = " << std::fixed << std::setprecision(2) << result << std::endl;
 		}
     }
-
     file.close();
 }

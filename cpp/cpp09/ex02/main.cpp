@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 01:37:40 by rpol              #+#    #+#             */
-/*   Updated: 2023/03/27 00:20:34 by rpol             ###   ########.fr       */
+/*   Updated: 2023/03/27 15:38:10 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@ int main(int argc, char **argv) {
     PmergeMe pmm;
     
     try {
+		
         pmm.merge_insert_sort_list( argc, argv );
         pmm.merge_insert_sort_deque( argc, argv );
         pmm.print_informations( argc, argv );
     } catch (const std::runtime_error& e) {
+		
         std::cerr << "Error: " << e.what() << std::endl;
         return EXIT_FAILURE;
     }

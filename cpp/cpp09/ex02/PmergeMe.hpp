@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 18:12:29 by rpol              #+#    #+#             */
-/*   Updated: 2023/03/27 00:20:22 by rpol             ###   ########.fr       */
+/*   Updated: 2023/03/27 15:54:03 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ class PmergeMe {
 	private:
 
 		/////// PRIV METHODS /////////
-		void 			_merge_insert_sort_deque(std::deque<int> &deq);
-		void 			_merge_insert_sort_list(std::list<int> &lst);
+		void 			_merge_insert_sort_deque( std::deque<int> &deq );
+		void 			_merge_insert_sort_list( std::list<int> &lst );
 		
 		std::list<int>	_list;
 		double 			_time_list;

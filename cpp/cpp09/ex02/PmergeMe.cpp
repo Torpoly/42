@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpol <rpol@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rpol <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 18:12:25 by rpol              #+#    #+#             */
-/*   Updated: 2023/03/27 00:20:24 by rpol             ###   ########.fr       */
+/*   Updated: 2023/03/27 15:44:59 by rpol             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,10 +120,12 @@ void PmergeMe::_merge_insert_sort_deque( std::deque<int> &deq ) {
 void PmergeMe::merge_insert_sort_list( int &argc, char **argv ) {
 	
 	timespec start_list, end_list;
+	
 	// start time
 	clock_gettime(CLOCK_MONOTONIC, &start_list);
 	//data managment
 	for (int i = 1; i < argc; ++i) {
+		
         int value = std::atoi(argv[i]);
         if (value <= 0) {
             throw std::runtime_error("Invalid input not a positive integer.");
@@ -131,11 +133,13 @@ void PmergeMe::merge_insert_sort_list( int &argc, char **argv ) {
         }
         this->_list.push_back(value);
     }
+	
     //sort
 	this->_merge_insert_sort_list(this->_list);
 	
     //end time
     clock_gettime(CLOCK_MONOTONIC, &end_list);
+	
 	//get microseconds
      this->_time_list = static_cast<double>((end_list.tv_sec - start_list.tv_sec) * 1000000000 +
                                              (end_list.tv_nsec - start_list.tv_nsec)) / 1000.0;
@@ -144,10 +148,13 @@ void PmergeMe::merge_insert_sort_list( int &argc, char **argv ) {
 void PmergeMe::merge_insert_sort_deque( int &argc, char **argv ) {
 	
 	timespec start_deque, end_deque;
+	
 	// start time
 	clock_gettime(CLOCK_MONOTONIC, &start_deque);
+	
 	//data managment
 	for (int i = 1; i < argc; ++i) {
+		
         int value = std::atoi(argv[i]);
         if (value <= 0) {
             throw std::runtime_error("Invalid input not a positive integer.");
@@ -155,10 +162,13 @@ void PmergeMe::merge_insert_sort_deque( int &argc, char **argv ) {
         }
         this->_deque.push_back(value);
     }
+	
     //sort
 	this->_merge_insert_sort_deque(this->_deque);
+	
 	//end time
     clock_gettime(CLOCK_MONOTONIC, &end_deque);
+	
 	//get microseconds
      this->_time_deque = static_cast<double>((end_deque.tv_sec - start_deque.tv_sec) * 1000000000 +
                                              (end_deque.tv_nsec - start_deque.tv_nsec)) / 1000.0;
